@@ -10,7 +10,7 @@ Un ejemplo simple de arquitetura SwiftUI intentando seguir los principios Clean.
 
 
 ## Demo
-# <img src="https://umane.emeal.nttdata.com/git/TECHSPACESMAPPS/ios/pokedex/-/blob/main/blob/preview.gif" width="50px" /> Demo
+# <img src="https://giphy.com/gifs/dSVZhF2LtStsEyar0Z" /> Demo
 
 
 
