@@ -1,8 +1,8 @@
 //
-//  FetchPokemonsUseCase.swift
+//  GetPokemonListUseCase.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 28/08/23.
+//  Created by yamartin on 22/11/24.
 //
 
 import Foundation
@@ -15,6 +15,7 @@ class GetPokemonListUseCase {
     }
     
     func execute(limit: Int, offset: Int) async throws -> [PokemonEntity] {
-        return try await repository.fetchPokemons(limit: limit, offset: offset)
+        return try await repository.fetchPokemons(limit: limit)
     }
 }
+

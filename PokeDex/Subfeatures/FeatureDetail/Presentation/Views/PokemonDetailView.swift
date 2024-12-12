@@ -2,15 +2,18 @@
 //  PokemonDetailView.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 28/08/23.
+//  Created by yamartin on 29/11/24.
 //
 
 import SwiftUI
 
+
 struct PokemonDetailView: View {
-    var id: Int
-    
-    @StateObject private var viewModel: PokemonDetailViewModel = PokemonDetailViewModel()
+    @StateObject private var viewModel: PokemonDetailViewModel
+   
+    init(_ viewModel: PokemonDetailViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         VStack {
@@ -33,14 +36,8 @@ struct PokemonDetailView: View {
                 }
             }
         }
-        .task {
-            viewModel.loadDetail(id: id)
+        .onAppear {
+            viewModel.onAppear()
         }
-    }
-}
-
-struct PokemonDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PokemonDetailView(id: 1)
     }
 }
