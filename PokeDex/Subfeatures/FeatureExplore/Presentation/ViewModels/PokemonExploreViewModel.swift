@@ -2,13 +2,19 @@
 //  PokemonExploreViewModel.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 31/08/23.
+//  Created by yamartin on 22/11/24.
 //
 
 import Foundation
 
 @MainActor
 class PokemonExploreViewModel: ObservableObject {
+    
+    var dto: PokemonExploreAssemblyDTO?
+    
+    init(dto: PokemonExploreAssemblyDTO?) {
+        self.dto = dto
+    }
     
     private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: ExploreRepository.shared)
     
@@ -22,7 +28,7 @@ class PokemonExploreViewModel: ObservableObject {
     func loadPokemonList() {
         Task {
             do {
-                let pokemonEntityList = try await getPokemonListUseCase.execute(limit: 20, offset: offset)
+                let pokemonEntityList = try await getPokemonListUseCase.execute(limit: Constants.pokeApiPokemonListlimit, offset: offset)
                 pokemonList += pokemonEntityList.compactMap({ pokemon in PokemonModel(pokemon: pokemon) })
             } catch {
                 print(error.localizedDescription)
@@ -30,7 +36,6 @@ class PokemonExploreViewModel: ObservableObject {
         }
     }
     
-    private func increaseOffset(value: Int) {
-        offset += value
-    }
+
+    
 }

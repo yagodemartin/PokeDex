@@ -2,10 +2,9 @@
 //  PokemonDetailModel.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 03/09/23.
+//  Created by yamartin on 29/11/24.
 //
 
-import Foundation
 
 struct PokemonDetailModel {
     let pokemon: PokemonModel

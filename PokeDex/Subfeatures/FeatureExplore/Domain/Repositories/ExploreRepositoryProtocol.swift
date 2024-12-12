@@ -1,12 +1,12 @@
 //
-//  PokeDexRepositoryProtocol.swift
+//  ExploreRepositoryProtocol.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 28/08/23.
+//  Created by yamartin on 22/11/24.
 //
 
 import Foundation
 
 protocol ExploreRepositoryProtocol {
-    func fetchPokemons(limit: Int, offset: Int) async throws -> [PokemonEntity]
+    func fetchPokemons(limit: Int) async throws -> [PokemonEntity]
 }
