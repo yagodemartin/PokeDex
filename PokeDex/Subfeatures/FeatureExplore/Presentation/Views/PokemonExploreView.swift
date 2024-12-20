@@ -28,9 +28,9 @@ struct PokemonExploreView: View {
         .onAppear {
         viewModel.onAppear()
         }
-        .sheet(isPresented: self.$viewModel.showError)
+        .sheet(isPresented: self.$viewModel.showWarningError)
         {
-            CustomErrorView(actionPerformed: viewModel.modalActionPerfomed)
+            CustomErrorView(actionPerformed: viewModel.errorViewAction)
         }
         .loaderBase(state: self.viewModel.state)
     }

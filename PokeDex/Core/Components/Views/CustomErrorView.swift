@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-enum ModalAction {
+enum CustomErrorAction {
     case retry
     case exit
 }
 
 struct CustomErrorView: View {
     
-    var actionPerformed: ((ModalAction) -> Void)?
+    var actionPerformed: ((CustomErrorAction) -> Void)?
 
     var body: some View {
         VStack {

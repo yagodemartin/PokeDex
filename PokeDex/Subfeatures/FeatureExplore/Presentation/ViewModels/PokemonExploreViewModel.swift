@@ -19,7 +19,6 @@ class PokemonExploreViewModel: BaseViewModel,ObservableObject {
     private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: ExploreRepository.shared)
     
     @Published var pokemonList: [PokemonModel] = [PokemonModel]()
-    @Published var showError = false
 
     public override func onAppear() {
         self.loadPokemonList()
@@ -35,17 +34,17 @@ class PokemonExploreViewModel: BaseViewModel,ObservableObject {
                 self.state = .okey
             } catch {
                 self.state = .error
-                showError = true
+                showWarningError = true
             }
         }
     }
     
-    func modalActionPerfomed(action: ModalAction) {
+    @MainActor func errorViewAction(action: CustomErrorAction) {
             switch action {
             case .retry:
-                break
+                self.loadPokemonList()
             case .exit:
-                break
+                showWarningError = false
             }
         }
     
