@@ -14,7 +14,7 @@ class GetPokemonListUseCase {
         self.repository = pokeDexRepository
     }
     
-    func execute(limit: Int, offset: Int) async throws -> [PokemonEntity] {
+    func execute(limit: Int) async throws -> [PokemonEntity] {
         return try await repository.fetchPokemons(limit: limit)
     }
 }

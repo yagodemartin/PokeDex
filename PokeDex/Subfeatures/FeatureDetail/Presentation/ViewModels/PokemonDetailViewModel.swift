@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-class PokemonDetailViewModel: ObservableObject {
+class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     
     var dto: PokemonDetailAssemblyDTO?
     
@@ -20,7 +20,7 @@ class PokemonDetailViewModel: ObservableObject {
     
     @Published var pokemonDetail: PokemonDetailModel?
     
-    func onAppear() {
+    override func onAppear() {
         self.loadDetail()
     }
     

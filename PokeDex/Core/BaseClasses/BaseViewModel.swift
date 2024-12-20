@@ -29,6 +29,7 @@ public class BaseViewModel {
     @Published var showWarningError = false
     @Published var alertButtonDisable = false
     
+    @MainActor
     public func onAppear() {
         print(#function)
     }
