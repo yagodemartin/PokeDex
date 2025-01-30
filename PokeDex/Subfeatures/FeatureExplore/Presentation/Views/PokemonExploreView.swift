@@ -16,14 +16,24 @@ struct PokemonExploreView: View {
     }
         
     var body: some View {
+        
         NavigationStack {
-            List {
-                ForEach(viewModel.pokemonList, id: \.self) { pokemon in
-                    NavigationLink(destination: PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: pokemon.id))) {
-                        PokemonCellView(name: pokemon.name, imageURL: pokemon.imageURL)
+            if viewModel.state == .okey {
+                List {
+                    ForEach(viewModel.pokemonList, id: \.self) { pokemon in
+                        NavigationLink(destination: PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: pokemon.id))) {
+                            PokemonCellView(name: pokemon.name, imageURL: pokemon.imageURL)
+                        }
                     }
                 }
             }
+            
+            else if viewModel.state == .error {
+                HStack {
+                    Text ("Ha habido un error")
+                }
+            }
+            
         }
         .onAppear {
         viewModel.onAppear()

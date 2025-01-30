@@ -446,6 +446,7 @@
 				6C2B26092A98B9A6003E951F /* Sources */,
 				6C2B260A2A98B9A6003E951F /* Frameworks */,
 				6C2B260B2A98B9A6003E951F /* Resources */,
+				75211CB32D2E7F9D0061D7E1 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -464,7 +465,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					6C2B260C2A98B9A6003E951F = {
 						CreatedOnToolsVersion = 14.3;
@@ -480,6 +481,8 @@
 				Base,
 			);
 			mainGroup = 6C2B26042A98B9A6003E951F;
+			packageReferences = (
+			);
 			productRefGroup = 6C2B260E2A98B9A6003E951F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -500,6 +503,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75211CB32D2E7F9D0061D7E1 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6C2B26092A98B9A6003E951F /* Sources */ = {
@@ -577,6 +602,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -637,6 +663,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
