@@ -12,13 +12,7 @@ import SwiftUI
 struct LoaderModifier: ViewModifier {
     var state: ViewModelState
     var loader: AnyView
-    
-    init(state: ViewModelState,
-         loader: AnyView) {
-        self.state = state
-        self.loader = loader
-    }
-    
+
     func body(content: Content) -> some View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .center), content: {
             content

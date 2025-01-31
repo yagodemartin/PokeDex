@@ -7,23 +7,22 @@
 
 import Foundation
 
+class PokemonExploreViewModel: BaseViewModel, ObservableObject {
 
-class PokemonExploreViewModel: BaseViewModel,ObservableObject {
-    
     var dto: PokemonExploreAssemblyDTO?
-    
+
     init(dto: PokemonExploreAssemblyDTO?) {
         self.dto = dto
     }
-    
+
     private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: ExploreRepository.shared)
-    
+
     @Published var pokemonList: [PokemonModel] = [PokemonModel]()
 
     public override func onAppear() {
         self.loadPokemonList()
     }
-    
+
     @MainActor
     func loadPokemonList() {
         self.state = .loading
@@ -38,7 +37,7 @@ class PokemonExploreViewModel: BaseViewModel,ObservableObject {
             }
         }
     }
-    
+
     @MainActor func errorViewAction(action: CustomErrorAction) {
             switch action {
             case .retry:
@@ -47,5 +46,5 @@ class PokemonExploreViewModel: BaseViewModel,ObservableObject {
                 showWarningError = false
             }
         }
-    
+
 }

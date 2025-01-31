@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-
 struct PokemonDetailView: View {
     @StateObject private var viewModel: PokemonDetailViewModel
-   
+
     init(_ viewModel: PokemonDetailViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         VStack {
             if viewModel.pokemonDetail == nil {
@@ -24,10 +23,10 @@ struct PokemonDetailView: View {
                     image.image?.resizable()
                 }
                 .scaledToFit()
-                
+
                 Text(viewModel.pokemonDetail?.pokemon.name ?? "")
                     .font(.title)
-                
+
                 HStack {
                     Text("Height: \(viewModel.pokemonDetail?.height ?? 0)")
                         .font(.subheadline)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 class PokemonExploreAssembly {
-    
+
     @MainActor
     static func view(dto: PokemonExploreAssemblyDTO) -> some View {
         let viewModel = PokemonExploreViewModel(dto: dto)

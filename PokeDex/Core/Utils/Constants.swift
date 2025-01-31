@@ -13,7 +13,7 @@ struct Constants {
     static let pokeApiTimeoutInterval: Double = 15.0
 
     static let pokeApiPokemonListlimit: Int = 5000
-    
+
     enum APIEndpoint {
         case getPokemonList(limit: Int)
         case getPokemonImage(id: Int)

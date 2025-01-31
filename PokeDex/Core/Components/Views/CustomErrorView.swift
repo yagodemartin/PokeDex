@@ -13,7 +13,7 @@ enum CustomErrorAction {
 }
 
 struct CustomErrorView: View {
-    
+
     var actionPerformed: ((CustomErrorAction) -> Void)?
 
     var body: some View {
@@ -35,9 +35,6 @@ struct CustomErrorView: View {
     }
 }
 
-
-
 #Preview {
     CustomErrorView()
 }
-

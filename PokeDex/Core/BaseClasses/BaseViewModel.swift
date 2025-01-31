@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ViewModelState: String {
     case okey
 
@@ -28,7 +27,7 @@ public class BaseViewModel {
     @Published var state: ViewModelState = .okey
     @Published var showWarningError = false
     @Published var alertButtonDisable = false
-    
+
     @MainActor
     public func onAppear() {
         print(#function)

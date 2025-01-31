@@ -12,7 +12,7 @@ class ExploreDataSource {
         guard let url: URL = Constants.APIEndpoint.getPokemonList(limit: limit).url else {
             throw URLError(.badURL)
         }
-        
+
         return try await NetworkUtils.shared.fetch(from: url)
     }
 }

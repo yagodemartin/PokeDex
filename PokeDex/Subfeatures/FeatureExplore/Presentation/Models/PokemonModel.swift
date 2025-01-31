@@ -11,7 +11,7 @@ struct PokemonModel: Hashable {
     let id: Int
     let name: String
     var imageURL: URL?
-    
+
     init?(pokemon: PokemonEntity) {
         self.id = pokemon.id
         self.name = pokemon.name
