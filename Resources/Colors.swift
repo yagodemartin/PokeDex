@@ -2,7 +2,7 @@
 //  Colors.swift
 //  NTTData-Networking
 //
-//  Created by Pedro Maria Moreno Gonzalez on 22/11/22.
+//  Created by yamartin on 22/11/24.
 //
 
 import SwiftUI

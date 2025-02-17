@@ -1,8 +1,7 @@
 //
-//  Pokemon_Clean_ArchitectureApp.swift
 //  Pokemon Clean Architecture
 //
-//  Created by NTTData on 25/08/23.
+//  Created by yamartin on 22/11/24.
 //
 
 import SwiftUI

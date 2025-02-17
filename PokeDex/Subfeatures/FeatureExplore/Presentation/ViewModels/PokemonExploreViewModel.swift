@@ -18,6 +18,7 @@ class PokemonExploreViewModel: BaseViewModel, ObservableObject {
     private let getPokemonListUseCase: GetPokemonListUseCase = GetPokemonListUseCase(pokeDexRepository: ExploreRepository.shared)
     let getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: DetailRepository())
     @Published var pokemonList: [PokemonModel] = [PokemonModel]()
+    @Published var pokemons: [PokemonModel] = [PokemonModel]()
 
     public override func onAppear() {
         self.loadPokemonList()
@@ -31,7 +32,8 @@ class PokemonExploreViewModel: BaseViewModel, ObservableObject {
                 let pokemonEntityList = try await getPokemonListUseCase.execute(limit: Constants.pokeApiPokemonListlimit)
                 pokemonList += pokemonEntityList.compactMap({ pokemon in PokemonModel(pokemon: pokemon) })
                 self.state = .okey
-                self.loadPokemonDetail()
+                await self.loadPokemonDetail()
+                self.pokemons = self.pokemons.sorted(by: { $0.id < $1.id })
 
             } catch {
                 self.state = .error
@@ -39,26 +41,37 @@ class PokemonExploreViewModel: BaseViewModel, ObservableObject {
             }
         }
     }
-
     @MainActor
-    func loadPokemonDetail() {
-        self.state = .loading
-        pokemonList.forEach { pokemon in
+    private func loadPokemonDetail() async {
 
-            Task {
-                do {
+        do {
+            try await withThrowingTaskGroup(of: (PokemonEntity?).self, body: { group in
 
-                    guard let pokemonDetailEntity: PokemonEntity = try await getPokemonDetailUseCase.execute(id: pokemon.id) else {
-                        return
+                pokemonList.forEach { pokemon in
+
+                    if (pokemon.id != 0) {
+                        group.addTask {
+                            return ( try await self.getPokemonDetailUseCase.execute(id: pokemon.id))
+                        }
                     }
-                } catch {
-                    self.state = .error
-                    showWarningError = true
+
                 }
-            }
-            self.state = .okey
+
+                for try await (pokemon) in group {
+                    if let pokem = pokemon {
+                        guard let model = PokemonModel(pokemon: pokem) else {
+                            return}
+                        pokemons.append(model)
+                    }
+                }
+            })
+
+        } catch (let error) {
         }
+
     }
+
+
 
 
 

@@ -13,6 +13,7 @@ struct PokemonEntity: Hashable {
     var imageURL: String
     var height: Int? = nil
     var weight: Int? = nil
+    var types: [PokemonTypes] = []
 
     init?(pokemonResponse: PokemonResponseModel) {
         guard let urlComponents = URLComponents(string: pokemonResponse.url),
@@ -32,5 +33,9 @@ struct PokemonEntity: Hashable {
         self.imageURL = Constants.APIEndpoint.getPokemonImage(id: id).url?.absoluteString ?? ""
         self.height = pokemonDetailResponse.height
         self.weight = pokemonDetailResponse.weight
+
+        self.types = pokemonDetailResponse.types.compactMap({ typeElement in
+           return PokemonTypes(rawValue: typeElement.type.name)
+        })
     }
 }

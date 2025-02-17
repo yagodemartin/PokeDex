@@ -2,7 +2,7 @@
 //  PokemonDetailResponseModel.swift
 //  PokeDex
 //
-//  Created by Muhammad Adha Fajri Jonison on 28/08/23.
+//  Created by yamartin on 22/11/24.
 //
 
 import Foundation

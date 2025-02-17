@@ -28,15 +28,20 @@ struct PokemonExploreView: View {
             VStack(spacing: 0) {
                 
                 HStack {
+                    Spacer()
                     Text("Pokedex")
                         .font(.title)
                         .bold()
                         .padding(.vertical)
                         .padding(.leading)
+                    Image("pokeball")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40 , height: 40)
                     Spacer()
                     
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .background(
                     Color.headerBackground
                 )
@@ -66,18 +71,21 @@ struct PokemonExploreView: View {
     var list: some View {
 
         ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: columns, alignment: .center, spacing: 0) {
-                ForEach(viewModel.pokemonList, id: \.self) { pokemon in
+            LazyVGrid(columns: columns, alignment: .center, spacing: 20) {
+                ForEach(viewModel.pokemons, id: \.self) { pokemon in
                     NavigationLink(destination: PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: pokemon.id))) {
-                        PokemonCellView(name: pokemon.name, imageURL: pokemon.imageURL)
-                        
+                        PokemonCellView(name: pokemon.name,
+                                        number: pokemon.id,
+                                        imageURL: pokemon.imageURL ,
+                                        background: pokemon.types.first?.getColor() ?? .black)
+
                     }
                 }
             }
             
         }
         .padding()
-        .background(Color.black)
+        .background(Color.white)
     }
     
 }

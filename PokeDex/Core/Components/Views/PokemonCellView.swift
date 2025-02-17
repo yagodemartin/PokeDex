@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PokemonCellView: View {
     let name: String
+    let number: Int?
     var imageURL: URL?
+    var background: Color = .gray
 
     var body: some View {
         VStack {
@@ -20,15 +22,18 @@ struct PokemonCellView: View {
                         .resizable().scaledToFill()
                 }
                 .frame(width: 150, height: 150)
-                .background(.green)
+                .background(LinearGradient(gradient: Gradient(colors: [background.opacity(0.6) , background]), startPoint: .top, endPoint: .bottom) )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(color:.black.opacity(0.5), radius: 5, x: 5, y: 5)
             }
 
             HStack {
-                Text(name)
+                Text(String(format: "%03d", number ?? 0)).foregroundColor(.black)
+                     // 66 -> "066"
+                Text(name.capitalized)
                     .font(.headline)
-            }.padding(.top)
+                    .foregroundColor(.black)
+            }.padding(.top, 10)
         }
     }
 }
