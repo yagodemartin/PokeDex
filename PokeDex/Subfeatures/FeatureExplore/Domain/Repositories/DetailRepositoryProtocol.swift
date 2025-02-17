@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DetailRepositoryProtocol {
-    func fetchPokemonDetail(id: Int) async throws -> PokemonDetailEntity?
+    func fetchPokemonDetail(id: Int) async throws -> PokemonEntity?
 }

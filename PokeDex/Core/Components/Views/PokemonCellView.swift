@@ -12,16 +12,23 @@ struct PokemonCellView: View {
     var imageURL: URL?
 
     var body: some View {
-        HStack {
-            AsyncImage(url: imageURL) { image in
-                image
-                    .image?
-                    .resizable()
+        VStack {
+            HStack {
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .image?
+                        .resizable().scaledToFill()
+                }
+                .frame(width: 150, height: 150)
+                .background(.green)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(color:.black.opacity(0.5), radius: 5, x: 5, y: 5)
             }
-            .scaledToFit()
-            .frame(width: 100, height: 100)
 
-            Text(name)
+            HStack {
+                Text(name)
+                    .font(.headline)
+            }.padding(.top)
         }
     }
 }

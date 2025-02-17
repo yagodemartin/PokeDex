@@ -14,8 +14,8 @@ class GetPokemonDetailUseCase {
         self.repository = repository
     }
 
-    func execute(id: Int) async throws -> PokemonDetailEntity? {
-        guard let pokemonDetail: PokemonDetailEntity = try await repository.fetchPokemonDetail(id: id) else {
+    func execute(id: Int) async throws -> PokemonEntity? {
+        guard let pokemonDetail: PokemonEntity = try await repository.fetchPokemonDetail(id: id) else {
             return nil
         }
 

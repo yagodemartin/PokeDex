@@ -19,12 +19,12 @@ struct PokemonDetailView: View {
             if viewModel.pokemonDetail == nil {
                 Text("Loading...")
             } else {
-                AsyncImage(url: viewModel.pokemonDetail?.pokemon.imageURL) { image in
+                AsyncImage(url: viewModel.pokemonDetail?.imageURL) { image in
                     image.image?.resizable()
                 }
                 .scaledToFit()
 
-                Text(viewModel.pokemonDetail?.pokemon.name ?? "")
+                Text(viewModel.pokemonDetail?.name ?? "")
                     .font(.title)
 
                 HStack {
