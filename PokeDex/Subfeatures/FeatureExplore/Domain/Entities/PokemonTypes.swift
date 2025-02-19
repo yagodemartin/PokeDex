@@ -98,4 +98,66 @@ enum PokemonTypes: String {
 
         }
     }
+
+    func getImage() -> Image {
+        switch self {
+        case .normal:
+            return Image("normal")
+
+        case .fire:
+            return Image("fire")
+
+        case .fighting:
+            return Image("fighting")
+
+        case .water:
+            return Image("water")
+
+        case .flying:
+            return Image("flying")
+
+        case .grass:
+            return Image("grass")
+
+        case .poison:
+            return Image("poison")
+
+        case .electric:
+            return Image("electric")
+
+        case .ground:
+            return Image("ground")
+
+        case .psychic:
+            return Image("psychic")
+
+        case .rock:
+            return Image("rock")
+
+        case .ice:
+            return Image("ice")
+
+        case .bug:
+            return Image("bug")
+
+        case .dragon:
+            return Image("dragon")
+
+        case .ghost:
+            return Image("ghost")
+
+        case .dark:
+            return Image("dark")
+
+        case .steel:
+            return Image("steel")
+
+        case .fairy:
+            return Image("fairy")
+
+        case .unknown:
+            return Image("fire")
+
+        }
+    }
 }

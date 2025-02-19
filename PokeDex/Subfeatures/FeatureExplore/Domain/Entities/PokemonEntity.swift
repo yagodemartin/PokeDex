@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct PokemonEntity: Hashable {
+struct PokemonEntity {
     let id: Int
     let name: String
     var imageURL: String
     var height: Int? = nil
     var weight: Int? = nil
     var types: [PokemonTypes] = []
+    var stats: PokemonStats? = nil
 
     init?(pokemonResponse: PokemonResponseModel) {
         guard let urlComponents = URLComponents(string: pokemonResponse.url),
@@ -37,5 +38,6 @@ struct PokemonEntity: Hashable {
         self.types = pokemonDetailResponse.types.compactMap({ typeElement in
            return PokemonTypes(rawValue: typeElement.type.name)
         })
+        self.stats = PokemonStats(from: pokemonDetailResponse.stats)
     }
 }

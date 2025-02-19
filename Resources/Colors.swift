@@ -31,4 +31,13 @@ extension Color {
         static let unkwnown = Color("unkwnown")
         static let water = Color("water")
     }
+
+    struct Stats {
+        static let hp = Color("hp")
+        static let attack = Color("attack")
+        static let defense = Color("defense")
+        static let specialAttack = Color("spattack")
+        static let specialDef = Color("spdef")
+        static let speed = Color("speed")
+    }
 }

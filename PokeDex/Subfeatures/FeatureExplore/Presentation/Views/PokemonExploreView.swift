@@ -72,7 +72,7 @@ struct PokemonExploreView: View {
 
         ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: columns, alignment: .center, spacing: 20) {
-                ForEach(viewModel.pokemons, id: \.self) { pokemon in
+                ForEach(viewModel.pokemons) { pokemon in
                     NavigationLink(destination: PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: pokemon.id))) {
                         PokemonCellView(name: pokemon.name,
                                         number: pokemon.id,

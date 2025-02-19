@@ -17,11 +17,14 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     }
 
     let getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: DetailRepository())
+    let getPokemonDetailSpecieUseCase = GetPokemonDetailSpecieUseCase(repository: DetailRepository())
 
     @Published var pokemonDetail: PokemonModel?
+    @Published var pokemonDetailSpecie: PokemonSpecieModel?
 
     override func onAppear() {
         self.loadDetail()
+        self.loadSpecie()
     }
 
     func loadDetail() {
@@ -37,6 +40,25 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
                 }
 
                 self.pokemonDetail = PokemonModel(pokemon: pokemonDetailEntity)
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+    }
+
+    func loadSpecie() {
+
+        guard let idPokemon = dto?.idPokemon else {
+            return // Mostrar error
+        }
+
+        Task {
+            do {
+                guard let pokemonSpeciesEntity: PokemonSpeciesEntity = try await getPokemonDetailSpecieUseCase.execute(id: idPokemon) else {
+                    return
+                }
+
+                self.pokemonDetailSpecie = PokemonSpecieModel(pokemon: pokemonSpeciesEntity)
             } catch {
                 print("Error: \(error)")
             }

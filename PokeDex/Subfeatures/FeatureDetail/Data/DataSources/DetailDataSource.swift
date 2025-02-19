@@ -15,4 +15,12 @@ class DetailDataSource {
 
         return try await NetworkUtils.shared.fetch(from: url)
     }
+
+    func fetchPokemonDetailSpecie(id: Int) async throws -> PokemonSpeciesResponseModel {
+        guard let url: URL = Constants.APIEndpoint.getPokemonDetailSpecies(id: id).url else {
+            throw URLError(.badURL)
+        }
+
+        return try await NetworkUtils.shared.fetch(from: url)
+    }
 }

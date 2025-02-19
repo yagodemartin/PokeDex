@@ -19,6 +19,7 @@ struct Constants {
         case getPokemonImage(id: Int)
         case getPokemonDetails(id: Int)
         case getPokemonElements(id: Int)
+        case getPokemonDetailSpecies(id: Int)
         var url: URL? {
             switch self {
             case .getPokemonList(let limit):
@@ -29,7 +30,10 @@ struct Constants {
                 return URL(string: "\(pokeApiURL)pokemon/\(id)/")
             case .getPokemonElements(let id):
                 return URL(string: "\(pokeApiURL)pokemon/\(id)/")
+            case .getPokemonDetailSpecies(let id):
+                return URL(string: "\(pokeApiURL)pokemon-species/\(id)/")
             }
+
         }
     }
 }

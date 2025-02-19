@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Ha habido un error" : {
+
+    },
+    "Height" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altura"
+          }
+        }
+      }
+    },
+    "Pokedex" : {
+
+    },
+    "Reintentar" : {
+
+    },
+    "Salir" : {
+
+    },
+    "Se ha producido un error" : {
+
+    },
+    "Stat" : {
+
+    },
+    "Stats" : {
+
+    },
+    "Type" : {
+
+    },
+    "Weight" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peso"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

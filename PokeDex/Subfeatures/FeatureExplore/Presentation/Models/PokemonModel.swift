@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct PokemonModel: Hashable {
+struct PokemonModel: Identifiable {
     let id: Int
     let name: String
     var imageURL: URL?
     var height: Int?
     var weight: Int?
     var types: [PokemonTypes] = []
+    var stats: PokemonStats?
 
     init?(pokemon: PokemonEntity) {
         self.id = pokemon.id
@@ -22,6 +23,7 @@ struct PokemonModel: Hashable {
         self.height = (pokemon.height ?? 0)
         self.weight = (pokemon.weight ?? 0) 
         self.types = pokemon.types
+        self.stats = pokemon.stats
     }
 
     func getNumber () -> String {
