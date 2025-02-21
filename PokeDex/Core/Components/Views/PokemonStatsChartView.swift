@@ -40,9 +40,7 @@ struct PokemonStatsChartView: View {
                         y: .value("Type", dataPoint.type))
                 .foregroundStyle(by: .value("Type", dataPoint.type))
                 .annotation(position: .trailing) {
-                    //                            Text(String(dataPoint.count))
-                    //                                .foregroundColor(.gray)
-                    AnnotationView(workout: dataPoint, data: data)
+                       AnnotationView(workout: dataPoint, data: data)
                 }
             }
             .chartLegend(.hidden)
@@ -51,6 +49,7 @@ struct PokemonStatsChartView: View {
                 AxisMarks { _ in
                     AxisValueLabel()
                 }
+
             }
             .chartForegroundStyleScale(domain: data.compactMap({ data in
                 data.id

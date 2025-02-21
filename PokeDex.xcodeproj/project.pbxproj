@@ -394,6 +394,7 @@
 		7558F20F2CEF473A001AB9DD /* Subfeatures */ = {
 			isa = PBXGroup;
 			children = (
+				75C519602D66297100ECC708 /* Tabview */,
 				6CCC41CD2AA0A43500EE93D2 /* FeatureExplore */,
 				6CCC41CF2AA0A47700EE93D2 /* FeatureDetail */,
 			);
@@ -441,6 +442,13 @@
 				75AC7DEA2D0B071C0063F88F /* ExploreRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		75C519602D66297100ECC708 /* Tabview */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tabview;
 			sourceTree = "<group>";
 		};
 		75FED5A92D0B00B200F01915 /* Modifiers */ = {
