@@ -11,10 +11,10 @@ struct PokemonEntity {
     let id: Int
     let name: String
     var imageURL: String
-    var height: Int? = nil
-    var weight: Int? = nil
+    var height: Int?
+    var weight: Int?
     var types: [PokemonTypes] = []
-    var stats: PokemonStats? = nil
+    var stats: PokemonStats?
 
     init?(pokemonResponse: PokemonResponseModel) {
         guard let urlComponents = URLComponents(string: pokemonResponse.url),

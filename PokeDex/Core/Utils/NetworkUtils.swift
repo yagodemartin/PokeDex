@@ -18,7 +18,6 @@ class NetworkUtils {
 
         let (data, response) = try await URLSession.shared.data(for: request)
         if let dataString = String(data: data, encoding: .utf8) {
-
                    Logger.api.info("\(dataString)") // Service response
                }
 

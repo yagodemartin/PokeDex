@@ -8,7 +8,6 @@
 import Foundation
 
 struct PokemonDetailReponseModel: Codable {
-
     let height: Int
     let id: Int
     let isDefault: Bool
@@ -152,7 +151,17 @@ class Sprites: Codable {
         case other, versions, animated
     }
 
-    init(backDefault: String, backFemale: String?, backShiny: String, backShinyFemale: String?, frontDefault: String, frontFemale: String?, frontShiny: String, frontShinyFemale: String?, other: Other?, versions: Versions?, animated: Sprites?) {
+    init(backDefault: String,
+         backFemale: String?,
+         backShiny: String,
+         backShinyFemale: String?,
+         frontDefault: String,
+         frontFemale: String?,
+         frontShiny: String,
+         frontShinyFemale: String?,
+         other: Other?,
+         versions: Versions?,
+         animated: Sprites?) {
         self.backDefault = backDefault
         self.backFemale = backFemale
         self.backShiny = backShiny

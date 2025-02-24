@@ -9,7 +9,6 @@ import Foundation
 
 @MainActor
 class PokemonDetailViewModel: BaseViewModel, ObservableObject {
-
     var dto: PokemonDetailAssemblyDTO?
 
     init(dto: PokemonDetailAssemblyDTO?) {
@@ -28,7 +27,6 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     }
 
     func loadDetail() {
-
         guard let idPokemon = dto?.idPokemon else {
             return // Mostrar error
         }
@@ -47,7 +45,6 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     }
 
     func loadSpecie() {
-
         guard let idPokemon = dto?.idPokemon else {
             return // Mostrar error
         }

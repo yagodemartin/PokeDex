@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct CardView: View {
-
     var pokemonDetail: PokemonModel?
     var pokeColor: Color
 
     var body: some View {
-        
         VStack {
             HStack {
-                Text ( pokemonDetail?.getNumber() ?? "000")
+                Text( pokemonDetail?.getNumber() ?? "000")
                     .padding( 10)
                     .foregroundColor(.white)
                 Spacer()
@@ -25,42 +23,41 @@ struct CardView: View {
                 image.image?.resizable()
             }
             .scaledToFit()
-            .frame(width: 300 , height: 300)
-            .padding(.bottom , 0)
-            
-            
+            .frame(width: 300, height: 300)
+            .padding(.bottom, 0)
+
             Text(pokemonDetail?.name.capitalized ?? "")
                 .font(.system(size: 50))
                 .bold()
-                .foregroundColor(.white)
-                .padding(.bottom , 0)
-            HStack ( spacing: 10){
+                .foregroundColor(.white) // esta mal
+                .padding(.bottom, 0)
+            HStack( spacing: 10) {
                 VStack {
-                    Text("Height")
+                    Text("Height") // esta mal
                         .font(.system(size: 30))
                         .bold()
                         .foregroundColor(.white)
-                    Text(String(pokemonDetail?.height  ?? 0))
+                    Text(String(pokemonDetail?.height ?? 0))
                         .font(.system(size: 20))
-                    .foregroundColor(.white)                        }
+                    .foregroundColor(.white)
+                }
                 VStack {
-                    Text("Weight")
+                    Text("Weight") // esta mal
                         .font(.system(size: 30))
                         .bold()
                         .foregroundColor(.white)
                     Text(String(pokemonDetail?.weight ?? 0))
                         .font(.system(size: 20))
-                    .foregroundColor(.white)                        }
-                
+                    .foregroundColor(.white)
+                }
             }
             .padding(.top, 1)
-            .padding(.bottom , 20)
-            
+            .padding(.bottom, 20)
         }.background(LinearGradient(
             colors: [
                 pokeColor.adjust(brightness: 0.2),
                 pokeColor,
-                pokeColor.adjust(brightness: -0.2),
+                pokeColor.adjust(brightness: -0.2)
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing

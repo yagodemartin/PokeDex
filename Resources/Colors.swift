@@ -8,8 +8,9 @@
 import SwiftUI
 
 extension Color {
-    static let headerBackground = Color("header background")
-    
+    static let headerBackground = Color("headerBackground")
+    static let defaultBackground = Color("defaultBackground")
+
     struct Types {
         static let bug = Color("bug")
         static let dark = Color("dark")
@@ -33,7 +34,7 @@ extension Color {
     }
 
     struct Stats {
-        static let hp = Color("hp")
+        static let hpoint = Color("hp")
         static let attack = Color("attack")
         static let defense = Color("defense")
         static let specialAttack = Color("spattack")

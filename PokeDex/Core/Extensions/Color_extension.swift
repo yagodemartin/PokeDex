@@ -17,7 +17,10 @@ extension Color {
         var currentOpacity: CGFloat = 0
 
         if color.getHue(&currentHue, saturation: &currentSaturation, brightness: &currentBrigthness, alpha: &currentOpacity) {
-            return Color(hue: currentHue + hue, saturation: currentSaturation + saturation, brightness: currentBrigthness + brightness, opacity: currentOpacity + opacity)
+            return Color(hue: currentHue + hue,
+                         saturation: currentSaturation + saturation,
+                         brightness: currentBrigthness + brightness,
+                         opacity: currentOpacity + opacity)
         }
         return self
     }

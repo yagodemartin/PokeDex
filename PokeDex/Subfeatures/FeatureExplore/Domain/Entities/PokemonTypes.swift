@@ -2,16 +2,7 @@
 //  PokemonTypes.swift
 //  PokeDex
 //
-//  Created by yamartin on 17/2/25.
-//
-
-
-//
-//  PokemonTypes.swift
-//  NTTData-Networking
-//
-//  Created by Pedro Maria Moreno Gonzalez on 22/11/22.
-//
+//  Created by yamartin on 17/
 
 import Foundation
 import SwiftUI
@@ -36,12 +27,12 @@ enum PokemonTypes: String {
     case steel
     case fairy
     case unknown = "???"
-    
+
     func getColor() -> Color {
         switch self {
         case .normal:
             return .Types.normal
-            
+
         case .fire:
             return .Types.fire
 
@@ -95,7 +86,6 @@ enum PokemonTypes: String {
 
         case .unknown:
             return .Types.unkwnown
-
         }
     }
 
@@ -157,7 +147,6 @@ enum PokemonTypes: String {
 
         case .unknown:
             return Image("fire")
-
         }
     }
 }

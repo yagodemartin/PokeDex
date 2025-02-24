@@ -32,5 +32,4 @@ public class BaseViewModel {
     public func onAppear() {
         print(#function)
     }
-
 }

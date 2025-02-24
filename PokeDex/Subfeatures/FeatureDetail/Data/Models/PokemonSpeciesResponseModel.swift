@@ -5,7 +5,6 @@
 //  Created by yamartin on 18/2/25.
 //
 
-
 import Foundation
 
 struct PokemonSpeciesResponseModel: Codable {

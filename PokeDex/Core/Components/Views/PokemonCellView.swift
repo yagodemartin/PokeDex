@@ -22,9 +22,9 @@ struct PokemonCellView: View {
                         .resizable().scaledToFill()
                 }
                 .frame(width: 150, height: 150)
-                .background(LinearGradient(gradient: Gradient(colors: [background.opacity(0.6) , background]), startPoint: .top, endPoint: .bottom) )
+                .background(LinearGradient(gradient: Gradient(colors: [background.opacity(0.6), background]), startPoint: .top, endPoint: .bottom) )
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .shadow(color:.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                .shadow(color: .black.opacity(0.5), radius: 5, x: 5, y: 5)
             }
 
             HStack {

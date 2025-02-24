@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject private var viewModel: PokemonDetailViewModel
@@ -18,9 +17,7 @@ struct PokemonDetailView: View {
     }
 
     var body: some View {
-
         let pokeColor = viewModel.pokemonDetail?.types.first?.getColor() ?? Color.gray
-
 
         NavigationStack {
             ZStack {
@@ -32,7 +29,7 @@ struct PokemonDetailView: View {
 
                     // Types
                     if let types = viewModel.pokemonDetail?.types {
-                        HStack{
+                        HStack {
                             ForEach(types, id: \.self) { type in
                                 CapsuleView(type: type)
                             }
@@ -45,10 +42,8 @@ struct PokemonDetailView: View {
                           .padding()
 
                     if let stats = self.viewModel.pokemonDetail?.stats {
-                        
                         PokemonStatsChartView(stats: stats).padding(.horizontal)
                     }
-
                 }
                 .background(.white)
                 .edgesIgnoringSafeArea(.horizontal)
@@ -63,14 +58,10 @@ struct PokemonDetailView: View {
             .toolbarBackground(Color.headerBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .tint(.black)
-
         }
-
-
     }
 }
 
 #Preview {
     PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: 4))
 }
-

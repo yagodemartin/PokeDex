@@ -5,10 +5,7 @@
 //  Created by yamartin on 18/2/25.
 //
 import Foundation
-
-
 struct PokemonSpeciesEntity {
-    
     let id: Int
     let name: String
     let order: Int
@@ -30,7 +27,7 @@ struct PokemonSpeciesEntity {
     let flavorTextEntries: [FlavorText]
     let genera: [Genus]
     let names: [Name]
-    
+
     init?(from model: PokemonSpeciesResponseModel) {
         self.id = model.id
         self.name = model.name
@@ -56,9 +53,7 @@ struct PokemonSpeciesEntity {
     }
 }
 
-
-struct FlavorTextEntry: Codable{
-    
+struct FlavorTextEntry: Codable {
     let flavorText: String
     let language: NamedAPIResource
     let version: NamedAPIResource

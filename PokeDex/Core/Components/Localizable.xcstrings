@@ -14,8 +14,15 @@
         }
       }
     },
-    "Pokedex" : {
-
+    "Pokedex NTTData" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PokeDex Everis"
+          }
+        }
+      }
     },
     "Reintentar" : {
 

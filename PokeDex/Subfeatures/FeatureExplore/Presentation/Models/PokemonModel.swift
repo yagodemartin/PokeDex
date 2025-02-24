@@ -21,7 +21,7 @@ struct PokemonModel: Identifiable {
         self.name = pokemon.name
         self.imageURL = URL(string: pokemon.imageURL)
         self.height = (pokemon.height ?? 0)
-        self.weight = (pokemon.weight ?? 0) 
+        self.weight = (pokemon.weight ?? 0)
         self.types = pokemon.types
         self.stats = pokemon.stats
     }
