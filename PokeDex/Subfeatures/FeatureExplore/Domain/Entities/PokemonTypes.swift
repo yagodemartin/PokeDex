@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 
-enum PokemonTypes: String {
+enum PokemonTypes: String, Codable {
     case normal
     case fire
     case fighting
@@ -26,7 +26,7 @@ enum PokemonTypes: String {
     case dark
     case steel
     case fairy
-    case unknown = "???"
+    case unknown
 
     func getColor() -> Color {
         switch self {

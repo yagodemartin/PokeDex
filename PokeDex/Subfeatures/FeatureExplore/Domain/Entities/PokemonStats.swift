@@ -4,15 +4,16 @@
 //
 //  Created by yamartin on 18/2/25.
 //
+import SwiftData
 
-
-struct PokemonStats {
-    let hpoint: Int
-    let attack: Int
-    let defense: Int
-    let specialAttack: Int
-    let specialDefense: Int
-    let speed: Int
+@Model
+class PokemonStats {
+    var hpoint: Int
+    var attack: Int
+    var defense: Int
+    var specialAttack: Int
+    var specialDefense: Int
+    var speed: Int
 
     init(from stats: [Stat]) {
         var tempStats: [String: Int] = [:]

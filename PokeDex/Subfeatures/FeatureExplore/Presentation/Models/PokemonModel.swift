@@ -6,15 +6,15 @@
 //
 
 import Foundation
+import SwiftData
 
-
-struct PokemonModel: Identifiable {
-    let id: Int
-    let name: String
+class PokemonModel : Identifiable {
+    var id: Int
+    var name: String
     var imageURL: URL?
     var height: Int?
     var weight: Int?
-    var types: [PokemonTypes] = []
+    var types: [PokemonTypes] // Suponiendo que PokemonTypes es un array de Strings
     var stats: PokemonStats?
 
     init?(pokemon: PokemonEntity) {
