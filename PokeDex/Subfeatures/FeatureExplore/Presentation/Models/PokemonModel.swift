@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct PokemonModel: Identifiable {
     let id: Int
     let name: String

@@ -5,6 +5,7 @@
 //  Created by yamartin on 18/2/25.
 //
 
+
 struct PokemonStats {
     let hpoint: Int
     let attack: Int

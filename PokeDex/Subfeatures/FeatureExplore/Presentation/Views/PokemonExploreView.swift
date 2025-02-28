@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct PokemonExploreView: View {
+    @EnvironmentObject var tabBarState: TabBarState
     @StateObject private var viewModel: PokemonExploreViewModel
 
     let columns = [
-        GridItem(.adaptive(minimum: 200), spacing: 0),
-        GridItem(.adaptive(minimum: 200), spacing: 0)
+        GridItem(.adaptive(minimum: 150), spacing: 10),
+        GridItem(.adaptive(minimum: 150), spacing: 10)
     ]
 
     init(_ viewModel: PokemonExploreViewModel) {
@@ -20,10 +21,9 @@ struct PokemonExploreView: View {
     }
 
     var body: some View {
-        NavigationStack {
             VStack(spacing: 0) {
                 header
-
+                Spacer()
                 if viewModel.state == .okey {
                     list
                 } else if viewModel.state == .error {
@@ -32,17 +32,20 @@ struct PokemonExploreView: View {
                     }
                 }
             } // VSTACK
-            .ignoresSafeArea(.all, edges: .bottom)
-        }  // Navigation Stack
+  
 
         .onAppear {
+            tabBarState.isTabBarVisible = true
             viewModel.onAppear()
         }
         .sheet(isPresented: self.$viewModel.showWarningError) {
             CustomErrorView(actionPerformed: viewModel.errorViewAction)
         }
         .loaderBase(state: self.viewModel.state)
+        .toolbar(.hidden, for: .tabBar)
+
     }
+
 
     var header: some View {
         HStack {
@@ -58,10 +61,11 @@ struct PokemonExploreView: View {
                 .frame(width: 40, height: 40)
             Spacer()
         }
-        .foregroundColor(.black) // MAL
+        .foregroundColor(.white) // MAL
         .background(
             Color.headerBackground
         )
+        
     }
 
     var list: some View {
@@ -74,11 +78,16 @@ struct PokemonExploreView: View {
                                         imageURL: pokemon.imageURL,
                                         background: pokemon.types.first?.getColor() ?? .black)
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                                    tabBarState.isTabBarVisible = false // Hide tab bar when navigating
+                                })
                 }
             }
         }
-        .padding()
+        .padding(.horizontal)
         .background(Color.defaultBackground)
+        .ignoresSafeArea(.all, edges: .bottom)
+
     }
 }
 

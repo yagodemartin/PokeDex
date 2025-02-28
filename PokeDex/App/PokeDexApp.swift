@@ -8,9 +8,11 @@ import SwiftUI
 
 @main
 struct PokeDexApp: App {
+    @StateObject private var tabBarState = TabBarState()
+
     var body: some Scene {
         WindowGroup {
-            PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
+            FloatingTabBar()                .environmentObject(tabBarState)
         }
     }
 }

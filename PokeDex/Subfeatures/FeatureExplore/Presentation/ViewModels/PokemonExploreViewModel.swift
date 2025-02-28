@@ -16,6 +16,8 @@ public class PokemonExploreViewModel: BaseViewModel, ObservableObject {
 
     private let getUseCase = GetPokemonListUseCase(pokeDexRepository: ExploreRepository.shared)
     let getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: DetailRepository())
+
+    var pokemonsLoaded: Bool = false
     var pokemonList = [PokemonModel]()
     @Published var pokemons = [PokemonModel]()
     public override func onAppear() {
@@ -24,6 +26,9 @@ public class PokemonExploreViewModel: BaseViewModel, ObservableObject {
 
     @MainActor
     func loadPokemonList() {
+        if pokemonsLoaded {
+            return
+        }
         self.state = .loading
         Task {
             do {
@@ -32,6 +37,7 @@ public class PokemonExploreViewModel: BaseViewModel, ObservableObject {
                 await self.loadPokemonDetail()
                 self.state = .okey
                 self.pokemons = self.pokemons.sorted(by: { $0.id < $1.id })
+                pokemonsLoaded = true
             } catch {
                 self.state = .error
                 showWarningError = true

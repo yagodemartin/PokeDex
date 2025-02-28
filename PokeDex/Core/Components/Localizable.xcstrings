@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Collection" : {
+
+    },
     "Ha habido un error" : {
 
     },
@@ -13,6 +16,9 @@
           }
         }
       }
+    },
+    "Pokedex" : {
+
     },
     "Pokedex NTTData" : {
       "localizations" : {
@@ -31,6 +37,12 @@
 
     },
     "Se ha producido un error" : {
+
+    },
+    "Search" : {
+
+    },
+    "Settings" : {
 
     },
     "Stat" : {

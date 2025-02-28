@@ -58,6 +58,7 @@ struct PokemonDetailView: View {
             .toolbarBackground(Color.headerBackground, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .tint(.black)
+            .toolbar(.hidden, for: .tabBar)
         }
     }
 }

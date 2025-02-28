@@ -45,6 +45,8 @@
 		75AC7DE92D0B070E0063F88F /* ExploreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC7DE72D0B070E0063F88F /* ExploreDataSource.swift */; };
 		75AC7DEC2D0B071C0063F88F /* ExploreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC7DEA2D0B071C0063F88F /* ExploreRepository.swift */; };
 		75AC7DEE2D0B30610063F88F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC7DED2D0B30610063F88F /* LoaderView.swift */; };
+		75ADE50B2D6CCCAD00F076CB /* FloatingTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ADE50A2D6CCCAD00F076CB /* FloatingTabBar.swift */; };
+		75ADE50D2D6F143700F076CB /* TabBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ADE50C2D6F143700F076CB /* TabBarState.swift */; };
 		75E0CC4F2D15920800D0A9D9 /* CustomErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0CC4E2D15920800D0A9D9 /* CustomErrorView.swift */; };
 		75FED5AB2D0B00C300F01915 /* LoaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FED5AA2D0B00C300F01915 /* LoaderModifier.swift */; };
 		75FED5AE2D0B030E00F01915 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FED5AD2D0B030E00F01915 /* BaseViewModel.swift */; };
@@ -92,6 +94,8 @@
 		75AC7DE72D0B070E0063F88F /* ExploreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDataSource.swift; sourceTree = "<group>"; };
 		75AC7DEA2D0B071C0063F88F /* ExploreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreRepository.swift; sourceTree = "<group>"; };
 		75AC7DED2D0B30610063F88F /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		75ADE50A2D6CCCAD00F076CB /* FloatingTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBar.swift; sourceTree = "<group>"; };
+		75ADE50C2D6F143700F076CB /* TabBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarState.swift; sourceTree = "<group>"; };
 		75E0CC4E2D15920800D0A9D9 /* CustomErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorView.swift; sourceTree = "<group>"; };
 		75FED5AA2D0B00C300F01915 /* LoaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderModifier.swift; sourceTree = "<group>"; };
 		75FED5AD2D0B030E00F01915 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 		75C519602D66297100ECC708 /* Tabview */ = {
 			isa = PBXGroup;
 			children = (
+				75ADE50C2D6F143700F076CB /* TabBarState.swift */,
+				75ADE50A2D6CCCAD00F076CB /* FloatingTabBar.swift */,
 			);
 			path = Tabview;
 			sourceTree = "<group>";
@@ -617,6 +623,7 @@
 				75FED5B22D0B040C00F01915 /* PokemonExploreAssembly.swift in Sources */,
 				6CCC41DA2AA0A56600EE93D2 /* DetailRepository.swift in Sources */,
 				6C2B26492A9C99C0003E951F /* ExploreRepositoryProtocol.swift in Sources */,
+				75ADE50B2D6CCCAD00F076CB /* FloatingTabBar.swift in Sources */,
 				75755DB12D64AAD700488B09 /* PokemonSpeciesResponseModel.swift in Sources */,
 				6C2B264B2A9C9BC7003E951F /* PokemonEntity.swift in Sources */,
 				6C2B26532A9CB187003E951F /* PokemonListResponseModel.swift in Sources */,
@@ -632,6 +639,7 @@
 				75755DBC2D64F8BF00488B09 /* PokemonStats.swift in Sources */,
 				75755DBA2D64F31200488B09 /* PokemonStatsChartView.swift in Sources */,
 				6CCC41ED2AA4C94400EE93D2 /* PokemonDetailViewModel.swift in Sources */,
+				75ADE50D2D6F143700F076CB /* TabBarState.swift in Sources */,
 				6C2B263D2A9AFA0E003E951F /* PokemonResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
