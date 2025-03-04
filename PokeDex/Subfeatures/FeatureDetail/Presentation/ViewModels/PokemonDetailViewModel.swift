@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     var dto: PokemonDetailAssemblyDTO?
+    var modelContext: ModelContext?
 
     init(dto: PokemonDetailAssemblyDTO?) {
         self.dto = dto
@@ -21,9 +23,11 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     @Published var pokemonDetail: PokemonModel?
     @Published var pokemonDetailSpecie: PokemonSpecieModel?
 
-    override func onAppear() {
+    func onAppear(model: ModelContext) {
+        self.modelContext = model
         self.loadDetail()
         self.loadSpecie()
+        self.fetchData()
     }
 
     func loadDetail() {
@@ -61,4 +65,35 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
             }
         }
     }
+
+    func likeButtonPressed(liked: Bool) {
+        guard let pokemonToSave = self.pokemonDetail else {
+                return
+        }
+        if liked {
+            // Grabamos en BBDD
+            self.modelContext?.insert(pokemonToSave)
+        } else {
+            // Grabamos en BBDD
+            self.modelContext?.delete(pokemonToSave)
+        }
+        try? self.modelContext?.save()
+    }
+
+    func fetchData() {
+                do {
+                    let descriptor = FetchDescriptor<PokemonModel>(sortBy: [SortDescriptor(\.id)])
+                    let pokemons = try modelContext?.fetch(descriptor)
+                    if let pokemons = pokemons {
+                        if !pokemons.isEmpty {
+                            let pokem = pokemons[0]
+                            print(pokem.name)
+                            print(pokem.id)
+
+                        }
+                    }
+                } catch {
+                    print("Fetch failed")
+                }
+            }
 }

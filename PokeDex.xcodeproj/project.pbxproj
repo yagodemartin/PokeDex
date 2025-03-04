@@ -47,6 +47,7 @@
 		75AC7DEE2D0B30610063F88F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC7DED2D0B30610063F88F /* LoaderView.swift */; };
 		75ADE50B2D6CCCAD00F076CB /* FloatingTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ADE50A2D6CCCAD00F076CB /* FloatingTabBar.swift */; };
 		75ADE50D2D6F143700F076CB /* TabBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ADE50C2D6F143700F076CB /* TabBarState.swift */; };
+		75ADE50F2D75B0AB00F076CB /* LikeAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ADE50E2D75B0AB00F076CB /* LikeAnimationView.swift */; };
 		75E0CC4F2D15920800D0A9D9 /* CustomErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0CC4E2D15920800D0A9D9 /* CustomErrorView.swift */; };
 		75FED5AB2D0B00C300F01915 /* LoaderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FED5AA2D0B00C300F01915 /* LoaderModifier.swift */; };
 		75FED5AE2D0B030E00F01915 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FED5AD2D0B030E00F01915 /* BaseViewModel.swift */; };
@@ -96,6 +97,7 @@
 		75AC7DED2D0B30610063F88F /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		75ADE50A2D6CCCAD00F076CB /* FloatingTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBar.swift; sourceTree = "<group>"; };
 		75ADE50C2D6F143700F076CB /* TabBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarState.swift; sourceTree = "<group>"; };
+		75ADE50E2D75B0AB00F076CB /* LikeAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAnimationView.swift; sourceTree = "<group>"; };
 		75E0CC4E2D15920800D0A9D9 /* CustomErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorView.swift; sourceTree = "<group>"; };
 		75FED5AA2D0B00C300F01915 /* LoaderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderModifier.swift; sourceTree = "<group>"; };
 		75FED5AD2D0B030E00F01915 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 		75FED5AF2D0B038900F01915 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75ADE50E2D75B0AB00F076CB /* LikeAnimationView.swift */,
 				756925F12D63CB3100785115 /* CardView.swift */,
 				75755DAC2D649E1F00488B09 /* CapsuleView.swift */,
 				6C2B26502A9CA97E003E951F /* PokemonCellView.swift */,
@@ -604,6 +607,7 @@
 				75AC7DE92D0B070E0063F88F /* ExploreDataSource.swift in Sources */,
 				756925EA2D632EB800785115 /* PokemonTypes.swift in Sources */,
 				6CCC41D82AA0A51A00EE93D2 /* DetailDataSource.swift in Sources */,
+				75ADE50F2D75B0AB00F076CB /* LikeAnimationView.swift in Sources */,
 				6C2B26572A9CB581003E951F /* PokemonDetailResponseModel.swift in Sources */,
 				6C2B26552A9CB506003E951F /* PokemonDetailView.swift in Sources */,
 				756925F22D63CB3100785115 /* CardView.swift in Sources */,

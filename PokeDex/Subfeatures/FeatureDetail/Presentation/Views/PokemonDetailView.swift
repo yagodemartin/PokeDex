@@ -9,8 +9,11 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) var modelContext
+    @EnvironmentObject var tabBarState: TabBarState
 
     @StateObject private var viewModel: PokemonDetailViewModel
+    @State var isLiked: Bool = false
 
     init(_ viewModel: PokemonDetailViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -25,7 +28,7 @@ struct PokemonDetailView: View {
                     .ignoresSafeArea()
 
                 ScrollView {
-                    CardView(pokemonDetail: viewModel.pokemonDetail, pokeColor: pokeColor)
+                    CardView(pokemonDetail: viewModel.pokemonDetail, pokeColor: pokeColor, liked: $isLiked)
 
                     // Types
                     if let types = viewModel.pokemonDetail?.types {
@@ -48,7 +51,7 @@ struct PokemonDetailView: View {
                 .background(.white)
                 .edgesIgnoringSafeArea(.horizontal)
                     .onAppear {
-                        viewModel.onAppear()
+                        viewModel.onAppear(model: modelContext)
                     }
             }
             .navigationTitle(viewModel.pokemonDetail?.name.capitalized ?? "")
@@ -59,6 +62,12 @@ struct PokemonDetailView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .tint(.black)
             .toolbar(.hidden, for: .tabBar)
+            .onChange(of: isLiked) {
+                if isLiked {
+                    tabBarState.isLiked = true
+                    self.viewModel.likeButtonPressed(liked: isLiked)
+                }
+            }
         }
     }
 }

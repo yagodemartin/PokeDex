@@ -8,7 +8,8 @@
 import Foundation
 import SwiftData
 
-class PokemonModel : Identifiable {
+@Model
+class PokemonModel: Identifiable {
     var id: Int
     var name: String
     var imageURL: URL?

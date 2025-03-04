@@ -18,6 +18,9 @@ struct FloatingTabBar: View {
     @State private var selectedTab: Tabs = .pokedex
     @State private var isTabBarVisible: Bool = true // Estado para controlar la visibilidad
 
+    @State private var likeAnimationViews: [LikeAnimationView] = []
+    private let animationDuration = 1.0
+
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab, content: {
@@ -46,10 +49,24 @@ struct FloatingTabBar: View {
             }
             VStack {
                 Spacer()
+                ForEach(likeAnimationViews) { likeAnimationView in
+                    likeAnimationView.onAppear {
+                        // when the animation ends, remove a LikeAnimationView from the array
+                        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                            likeAnimationViews.removeFirst()
+                        }
+                    }
+                }
                 tabBar
             }
         }
         .toolbar(.hidden, for: .tabBar)
+        .onChange(of: tabBarState.isLiked) {
+            if tabBarState.isLiked {
+                likeAnimationViews.append(LikeAnimationView(duration: animationDuration))
+                tabBarState.isLiked = false
+            }
+        }
     }
 
     private var tabBar: some View {
@@ -92,7 +109,6 @@ struct FloatingTabBar: View {
                                 Text("Collection")
                                     .font(.system(size: 11))
                                     .foregroundColor(.white)
-
                             }
                         })
                     })
@@ -134,7 +150,6 @@ struct FloatingTabBar: View {
                                 Text("Settings")
                                     .font(.system(size: 11))
                                     .foregroundColor(.white)
-
                             }
                         })
                     })

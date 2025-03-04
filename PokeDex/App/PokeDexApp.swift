@@ -5,6 +5,20 @@
 //
 
 import SwiftUI
+import SwiftData
+
+var sharedModelContainer: ModelContainer = {
+    let schema = Schema([
+        PokemonModel.self
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+    do {
+        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
+    }
+}()
 
 @main
 struct PokeDexApp: App {
@@ -13,6 +27,7 @@ struct PokeDexApp: App {
     var body: some Scene {
         WindowGroup {
             FloatingTabBar()                .environmentObject(tabBarState)
+                .modelContainer(sharedModelContainer)
         }
     }
 }
