@@ -216,7 +216,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "86F44B78-2B77-4CC2-A1F9-93E8D21ECEA9"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/Views/PokemonDetailView.swift"
@@ -232,7 +232,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "FB856333-0DB3-4350-998E-F100B7E69A92"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/Views/PokemonDetailView.swift"
@@ -248,7 +248,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3346920B-7A76-457C-917D-95CEFBF7855A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/Tabview/FloatingTabBar.swift"
@@ -264,7 +264,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B0AD9DF2-04E5-4A72-825B-4E79EF60171B"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/ViewModels/PokemonDetailViewModel.swift"
@@ -280,7 +280,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "717E40B1-59F3-44F9-8FC8-71884E7E0B89"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/ViewModels/PokemonDetailViewModel.swift"
@@ -296,7 +296,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "66B65D96-9C56-458C-977D-2B319A4C5068"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/ViewModels/PokemonDetailViewModel.swift"
@@ -312,7 +312,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C7F44C87-EB79-402B-8B07-1CE9C6F88DE1"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/ViewModels/PokemonDetailViewModel.swift"
@@ -321,6 +321,112 @@
             startingLineNumber = "91"
             endingLineNumber = "91"
             landmarkName = "fetchData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A022FDF-79F8-4571-90F8-1298F691F094"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "onAppear()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "loadFavorites()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 42e1dde5005027c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
+                  moduleName = "PokeDex.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 203891c3a249efc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
+                  moduleName = "PokeDex.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 20cd45c89a3963c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
+                  moduleName = "PokeDex.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - f1c3313a572e3dc4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
+                  moduleName = "PokeDex.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "686162AC-D8F6-4BA4-ACB7-356C73952803"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "loadFavorites()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

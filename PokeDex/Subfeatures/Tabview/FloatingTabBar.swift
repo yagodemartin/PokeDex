@@ -10,7 +10,7 @@ import SwiftUI
 struct FloatingTabBar: View {
     enum Tabs {
         case pokedex
-        case collection
+        case favorites
         case search
         case settings
     }
@@ -30,8 +30,8 @@ struct FloatingTabBar: View {
                     }                            .tag(Tabs.pokedex)
 
                     NavigationStack {
-                        Color(.blue).ignoresSafeArea()
-                    }                            .tag(Tabs.collection)
+                        FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
+                    }                            .tag(Tabs.favorites)
 
                     NavigationStack {
                         Color(.orange).ignoresSafeArea()
@@ -97,7 +97,7 @@ struct FloatingTabBar: View {
 
                     Button(action: {
                         withAnimation {
-                            selectedTab = .collection
+                            selectedTab = .favorites
                         }
                     }, label: {
                         VStack(alignment: .center, content: {
@@ -105,14 +105,14 @@ struct FloatingTabBar: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 22)
-                            if selectedTab == .collection {
+                            if selectedTab == .favorites {
                                 Text("Collection")
                                     .font(.system(size: 11))
                                     .foregroundColor(.white)
                             }
                         })
                     })
-                    .foregroundStyle(selectedTab == .collection ? .white : .black)
+                    .foregroundStyle(selectedTab == .favorites ? .white : .black)
                     Spacer()
 
                     Button(action: {
@@ -129,7 +129,6 @@ struct FloatingTabBar: View {
                                 Text("Search")
                                     .font(.system(size: 11))
                                     .foregroundColor(.white)
-
                             }
                         })
                     })

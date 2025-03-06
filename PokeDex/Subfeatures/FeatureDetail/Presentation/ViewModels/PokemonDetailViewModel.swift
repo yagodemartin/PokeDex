@@ -89,7 +89,6 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
                             let pokem = pokemons[0]
                             print(pokem.name)
                             print(pokem.id)
-
                         }
                     }
                 } catch {
