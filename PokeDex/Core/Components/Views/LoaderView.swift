@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Lottie
 
 struct LoaderView: View {
     var body: some View {
@@ -17,9 +18,10 @@ struct LoaderView: View {
                     .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
                 VStack(alignment: .center, spacing: 0.0) {
                     Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .pink))
-                        .scaleEffect(2.0)
+                    LottieView(animation: .named("lottieAnimation"))
+                        .playing()
+                        .resizable()
+                        .frame(width: 200, height: 200)
                     Spacer()
                 }
             }

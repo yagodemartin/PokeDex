@@ -354,64 +354,6 @@
             endingLineNumber = "29"
             landmarkName = "loadFavorites()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 42e1dde5005027c3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
-                  moduleName = "PokeDex.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-               <Location
-                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 203891c3a249efc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
-                  moduleName = "PokeDex.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-               <Location
-                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - 20cd45c89a3963c5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
-                  moduleName = "PokeDex.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-               <Location
-                  uuid = "6AC59C4C-E9C0-4B31-AD1D-A62DED0F1855 - f1c3313a572e3dc4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 () async -&gt; () in PokeDex.FeatureFavoritesViewModel.loadFavorites() -&gt; ()"
-                  moduleName = "PokeDex.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yamartin/Documents/Proyectos/PokeDex/PokeDex/Subfeatures/FeatureFavourites/FeatureFavoritesViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
