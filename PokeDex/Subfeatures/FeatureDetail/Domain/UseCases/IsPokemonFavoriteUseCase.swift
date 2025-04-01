@@ -4,8 +4,6 @@
 //
 //  Created by yamartin on 4/3/25.
 //
-
-
 class IsPokemonFavoriteUseCase {
     let repository: FavoritesRepositoryProtocol
 

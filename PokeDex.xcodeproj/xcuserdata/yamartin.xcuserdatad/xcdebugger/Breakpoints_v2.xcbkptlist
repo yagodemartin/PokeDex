@@ -264,7 +264,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B0AD9DF2-04E5-4A72-825B-4E79EF60171B"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PokeDex/Subfeatures/FeatureDetail/Presentation/ViewModels/PokemonDetailViewModel.swift"

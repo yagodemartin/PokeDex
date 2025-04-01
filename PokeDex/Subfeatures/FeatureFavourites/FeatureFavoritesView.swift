@@ -8,7 +8,6 @@ struct FeatureFavoritesView: View {
         GridItem(.adaptive(minimum: 150), spacing: 10),
         GridItem(.adaptive(minimum: 150), spacing: 10)
     ]
-    
     init(_ viewModel: FeatureFavoritesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -24,7 +23,6 @@ struct FeatureFavoritesView: View {
                 }
             } // VSTACK
 
-
         .onAppear {
             tabBarState.isTabBarVisible = true
             viewModel.onAppear()
@@ -34,7 +32,6 @@ struct FeatureFavoritesView: View {
         }
         .loaderBase(state: self.viewModel.state)
         .toolbar(.hidden, for: .tabBar)
-
     }
 
     var list: some View {

@@ -363,6 +363,8 @@
 			children = (
 				75ADE5182D77533F00F076CB /* IsPokemonFavoriteUseCase.swift */,
 				75ADE5162D77533100F076CB /* FetchAllFavoritePokemonsUseCase.swift */,
+				75ADE5122D77531000F076CB /* AddPokemonToFavoritesUseCase.swift */,
+				75ADE5142D77532000F076CB /* RemovePokemonFromFavoritesUseCase.swift */,
 				6C2B265A2A9D8E3F003E951F /* GetPokemonDetailUseCase.swift */,
 				75755DB52D64B00000488B09 /* GetPokemonDetailSpecieUseCase.swift */,
 			);
@@ -372,8 +374,6 @@
 		6CCC41DD2AA0A58900EE93D2 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				75ADE5142D77532000F076CB /* RemovePokemonFromFavoritesUseCase.swift */,
-				75ADE5122D77531000F076CB /* AddPokemonToFavoritesUseCase.swift */,
 				75ADE5102D77528300F076CB /* FavoritesRepositoryProtocol.swift */,
 				6CCC41DE2AA0A59B00EE93D2 /* DetailRepositoryProtocol.swift */,
 			);

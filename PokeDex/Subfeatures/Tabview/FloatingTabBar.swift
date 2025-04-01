@@ -154,6 +154,24 @@ struct FloatingTabBar: View {
                     })
                     .foregroundStyle(selectedTab == .settings ? .white : .black)
                     Spacer()
+                    Button(action: {
+                        withAnimation {
+                            selectedTab = .search
+                        }
+                    }, label: {
+                        VStack(alignment: .center, content: {
+                            Image(systemName: "bell.badge.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 22)
+                            if selectedTab == .search {
+                                Text("Search")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.white)
+                            }
+                        })
+                    })
+                    .foregroundStyle(selectedTab == .search ? .white : .black)
                 })
                 .padding()
                 .frame(height: 72)
