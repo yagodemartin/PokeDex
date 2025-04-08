@@ -9,7 +9,7 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>PokeDexTests.xcscheme_^#shared#^_</key>
+		<key>PokeDexPruebas.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -23,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>753AAC732D9BE40200AAC2F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>75CC0AE42DA5131700E7C2E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

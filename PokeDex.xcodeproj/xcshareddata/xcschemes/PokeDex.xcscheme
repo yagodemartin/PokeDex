@@ -41,6 +41,17 @@
                ReferencedContainer = "container:PokeDex.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "75CC0AE42DA5131700E7C2E9"
+               BuildableName = "PokeDexPruebas.xctest"
+               BlueprintName = "PokeDexPruebas"
+               ReferencedContainer = "container:PokeDex.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
