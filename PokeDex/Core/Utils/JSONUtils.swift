@@ -1,3 +1,11 @@
+//
+//  JSONUtils.swift
+//  PokeDex
+//
+//  Created by yamartin on 8/4/25.
+//
+
+
 import Foundation
 
 class JSONUtils {

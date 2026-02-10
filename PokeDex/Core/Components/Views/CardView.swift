@@ -31,8 +31,6 @@ struct CardView: View {
                 .frame(width: 300, height: 300)
                 .padding(.bottom, 0)
 
-
-
                 Text(pokemonDetail?.name.capitalized ?? "")
                     .font(.system(size: 50))
                     .bold()

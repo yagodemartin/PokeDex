@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd comprehensive DocC documentation to codebase\n\n- Document GetPokemonListUseCase with overview, usage examples, and performance notes\n- Document GetPokemonDetailUseCase with parallel loading optimization details\n- Document PokemonEntity with all properties explained and initialization methods\n- Document BaseViewModel class and ViewModelState enum with lifecycle documentation\n- Document ExploreRepository with data transformation flow and singleton pattern\n- Document PokemonExploreViewModel with all methods:\n  - loadPokemonList\\(\\): main entry point with performance metrics\n  - loadPokemonDetail\\(\\): parallel TaskGroup optimization \\(15-30s vs 8 min\\)\n  - errorViewAction\\(\\): error handling logic\n  \n- Create DOCC_GUIDE.md explaining:\n  - How to access DocC in Xcode \\(Quick Help, Inspector, Symbol Documentation\\)\n  - Keyboard shortcuts\n  - All documented files and their content\n  - Examples of how to navigate documentation\n  - Patterns used for documentation\n\nDocumentation is now accessible via ⌘+Click in Xcode for all main classes and methods.\n\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
