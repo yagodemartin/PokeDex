@@ -7,7 +7,11 @@
 import Foundation
 import SwiftUI
 
-enum PokemonTypes: String, Codable {
+/// Enum representing Pokémon types with associated colors and icons.
+///
+/// Covers all 18 Pokémon types plus an unknown type for error cases.
+/// Each type has an associated color and icon image for UI display.
+enum PokemonTypes: String, Codable, Sendable {
     case normal
     case fire
     case fighting
@@ -28,125 +32,81 @@ enum PokemonTypes: String, Codable {
     case fairy
     case unknown
 
+    // MARK: - Static Mappings
+
+    /// Mapping of Pokémon types to their color name identifiers.
+    ///
+    /// Used to reduce cyclomatic complexity from O(n) switch statements
+    /// to O(1) dictionary lookups. Maps type to Asset Catalog color names.
+    private static let colorNameMap: [PokemonTypes: String] = [
+        .normal: "normal",
+        .fire: "fire",
+        .fighting: "fighting",
+        .water: "water",
+        .flying: "flying",
+        .grass: "grass",
+        .poison: "poison",
+        .electric: "electric",
+        .ground: "ground",
+        .psychic: "psychic",
+        .rock: "rock",
+        .ice: "ice",
+        .bug: "bug",
+        .dragon: "dragon",
+        .ghost: "ghost",
+        .dark: "dark",
+        .steel: "steel",
+        .fairy: "fairy",
+        .unknown: "unkwnown"
+    ]
+
+    /// Mapping of Pokémon types to their icon image names.
+    ///
+    /// Used to reduce cyclomatic complexity from O(n) switch statements
+    /// to O(1) dictionary lookups. Each type has an associated icon.
+    private static let imageMap: [PokemonTypes: String] = [
+        .normal: "normal",
+        .fire: "fire",
+        .fighting: "fighting",
+        .water: "water",
+        .flying: "flying",
+        .grass: "grass",
+        .poison: "poison",
+        .electric: "electric",
+        .ground: "ground",
+        .psychic: "psychic",
+        .rock: "rock",
+        .ice: "ice",
+        .bug: "bug",
+        .dragon: "dragon",
+        .ghost: "ghost",
+        .dark: "dark",
+        .steel: "steel",
+        .fairy: "fairy",
+        .unknown: "fire"
+    ]
+
+    // MARK: - Public Methods
+
+    /// Returns the UI color associated with this Pokémon type.
+    ///
+    /// Uses dictionary lookup for O(1) performance instead of
+    /// switch statement with O(n) cyclomatic complexity.
+    ///
+    /// - Returns: Color value for this type
     func getColor() -> Color {
-        switch self {
-        case .normal:
-            return .Types.normal
-
-        case .fire:
-            return .Types.fire
-
-        case .fighting:
-            return .Types.fighting
-
-        case .water:
-            return .Types.water
-
-        case .flying:
-            return .Types.flying
-
-        case .grass:
-            return .Types.grass
-
-        case .poison:
-            return .Types.poison
-
-        case .electric:
-            return .Types.electric
-
-        case .ground:
-            return .Types.ground
-
-        case .psychic:
-            return .Types.psychic
-
-        case .rock:
-            return .Types.rock
-
-        case .ice:
-            return .Types.ice
-
-        case .bug:
-            return .Types.bug
-
-        case .dragon:
-            return .Types.dragon
-
-        case .ghost:
-            return .Types.ghost
-
-        case .dark:
-            return .Types.dark
-
-        case .steel:
-            return .Types.steel
-
-        case .fairy:
-            return .Types.fairy
-
-        case .unknown:
-            return .Types.unkwnown
-        }
+        let colorName = Self.colorNameMap[self] ?? "normal"
+        return Color(colorName)
     }
 
+    /// Returns the icon image for this Pokémon type.
+    ///
+    /// Uses dictionary lookup for O(1) performance instead of
+    /// switch statement with O(n) cyclomatic complexity.
+    ///
+    /// - Returns: Image for this type
     func getImage() -> Image {
-        switch self {
-        case .normal:
-            return Image("normal")
-
-        case .fire:
-            return Image("fire")
-
-        case .fighting:
-            return Image("fighting")
-
-        case .water:
-            return Image("water")
-
-        case .flying:
-            return Image("flying")
-
-        case .grass:
-            return Image("grass")
-
-        case .poison:
-            return Image("poison")
-
-        case .electric:
-            return Image("electric")
-
-        case .ground:
-            return Image("ground")
-
-        case .psychic:
-            return Image("psychic")
-
-        case .rock:
-            return Image("rock")
-
-        case .ice:
-            return Image("ice")
-
-        case .bug:
-            return Image("bug")
-
-        case .dragon:
-            return Image("dragon")
-
-        case .ghost:
-            return Image("ghost")
-
-        case .dark:
-            return Image("dark")
-
-        case .steel:
-            return Image("steel")
-
-        case .fairy:
-            return Image("fairy")
-
-        case .unknown:
-            return Image("fire")
-        }
+        let imageName = Self.imageMap[self] ?? "normal"
+        return Image(imageName)
     }
 }
