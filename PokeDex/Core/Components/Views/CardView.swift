@@ -78,11 +78,14 @@ struct CardView: View {
         @Binding var isLiked: Bool
 
         var body: some View {
-            Button(action: {
-                self.isLiked.toggle()
-            }) {
-                Image(systemName: isLiked ? "heart.fill" : "heart")
-            }
+            Button(
+                action: {
+                    self.isLiked.toggle()
+                },
+                label: {
+                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                }
+            )
         }
     }
 }

@@ -30,7 +30,7 @@ import SwiftData
 /// - `types`: Type(s) of the Pokémon
 /// - `stats`: Base statistics (HP, Attack, Defense, etc.)
 @Model
-class PokemonModel: Identifiable, Sendable {
+final class PokemonModel: Identifiable, @unchecked Sendable {
     var id: Int
     var name: String
     var imageURL: URL?
