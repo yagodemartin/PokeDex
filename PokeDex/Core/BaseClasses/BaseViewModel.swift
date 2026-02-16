@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 /// The possible states of a view during its lifecycle.
 ///
@@ -81,6 +82,13 @@ public class BaseViewModel {
     /// Controls whether action buttons should be disabled.
     /// Typically set to `true` during network operations to prevent duplicate requests.
     @Published var alertButtonDisable = false
+
+    /// Logs an error message using the centralized API logger.
+    /// All ViewModels should use this method for consistent error logging.
+    /// - Parameter message: The error message to log
+    func logError(_ message: String) {
+        Logger.api.error("\(message)")
+    }
 
     /// Called when the view appears on screen.
     /// Override this method in subclasses to perform initialization,

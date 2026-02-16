@@ -5,7 +5,6 @@
 //  Created by yamartin on 4/3/25.
 //
 
-
 protocol FavoritesRepositoryProtocol {
     /// Adds a Pokémon to the favorites list using the PokemonModel.
     /// - Parameter pokemon: The PokemonModel object to add to favorites.

@@ -8,8 +8,29 @@
 import Foundation
 import SwiftData
 
+/// Presentation model for Pokémon data with persistence support.
+///
+/// `PokemonModel` is a `@Model` class that provides persistent storage through SwiftData.
+/// It represents a Pokémon with all its basic and detailed information.
+///
+/// ## Thread Safety
+/// Conforms to `Sendable` for thread-safe operations in Swift 6+ and compatibility with
+/// `@MainActor`-isolated code. All properties are safe to send across actor boundaries.
+///
+/// ## Persistence
+/// Automatically persisted by SwiftData. The model is used for both:
+/// - Display in the explore list
+/// - Storing favorite Pokémon locally
+///
+/// ## Properties
+/// - `id`: Unique Pokémon identifier
+/// - `name`: Pokémon name
+/// - `imageURL`: URL to Pokémon artwork
+/// - `height`, `weight`: Physical dimensions
+/// - `types`: Type(s) of the Pokémon
+/// - `stats`: Base statistics (HP, Attack, Defense, etc.)
 @Model
-class PokemonModel: Identifiable {
+class PokemonModel: Identifiable, Sendable {
     var id: Int
     var name: String
     var imageURL: URL?

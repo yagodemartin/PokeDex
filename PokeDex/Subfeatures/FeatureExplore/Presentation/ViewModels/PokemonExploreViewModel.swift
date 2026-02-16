@@ -155,12 +155,16 @@ public class PokemonExploreViewModel: BaseViewModel, ObservableObject {
                 for try await (pokemon) in group {
                     if let pokem = pokemon {
                         guard let model = PokemonModel(pokemon: pokem) else {
-                            return}
+                            continue
+                        }
                         pokemons.append(model)
                     }
                 }
             })
         } catch {
+            self.state = .error
+            self.showWarningError = true
+            self.logError("Failed to load pokemon details: \(error)")
         }
     }
 

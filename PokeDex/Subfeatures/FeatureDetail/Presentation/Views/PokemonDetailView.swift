@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var tabBarState: TabBarState
 
     @StateObject private var viewModel: PokemonDetailViewModel
@@ -51,7 +50,7 @@ struct PokemonDetailView: View {
                 .background(.white)
                 .edgesIgnoringSafeArea(.horizontal)
                     .onAppear {
-                        viewModel.onAppear(model: modelContext)
+                        viewModel.onAppear()
                     }
             }
             .navigationTitle(viewModel.pokemonDetail?.name.capitalized ?? "")

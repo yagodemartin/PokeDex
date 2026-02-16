@@ -8,10 +8,23 @@
 import Foundation
 import SwiftData
 
+/// ViewModel for displaying detailed Pokémon information.
+///
+/// `PokemonDetailViewModel` manages the presentation logic for the Pokémon detail screen.
+/// It handles loading Pokémon details, species information, and favorite status management.
+///
+/// ## Responsibilities
+/// - Fetch detailed Pokémon information from the API
+/// - Fetch Pokémon species and flavor text information
+/// - Manage favorite/unfavorite operations with error handling
+/// - Manage view states and error dialogs
+///
+/// ## Data Flow
+/// The view model uses multiple use cases to access data through the repository pattern,
+/// ensuring clean separation of concerns and proper error propagation.
 @MainActor
 class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     var dto: PokemonDetailAssemblyDTO?
-    var modelContext: ModelContext?
 
     init(dto: PokemonDetailAssemblyDTO?) {
         self.dto = dto
@@ -20,19 +33,29 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     let getPokemonDetailUseCase = GetPokemonDetailUseCase(repository: DetailRepository())
     let getPokemonDetailSpecieUseCase = GetPokemonDetailSpecieUseCase(repository: DetailRepository())
 
+    /// Use case for adding Pokémon to favorites with error handling
+    let addFavoriteUseCase = AddPokemonToFavoritesUseCase(repository: FavoritesRepository.shared)
+    /// Use case for removing Pokémon from favorites with error handling
+    let removeFavoriteUseCase = RemovePokemonFromFavoritesUseCase(repository: FavoritesRepository.shared)
+
     @Published var pokemonDetail: PokemonModel?
     @Published var pokemonDetailSpecie: PokemonSpecieModel?
 
-    func onAppear(model: ModelContext) {
-        self.modelContext = model
+    override func onAppear() {
         self.loadDetail()
         self.loadSpecie()
-        self.fetchData()
     }
 
+    /// Loads detailed Pokémon information from the API.
+    ///
+    /// Fetches the Pokémon details using the use case and updates the view model state.
+    /// On success, sets state to `.okey`.
+    /// On failure, sets state to `.error` and displays an error dialog.
+    ///
+    /// - Note: This method is called during the view lifecycle (onAppear).
     func loadDetail() {
         guard let idPokemon = dto?.idPokemon else {
-            return // Mostrar error
+            return
         }
 
         Task {
@@ -43,14 +66,23 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
 
                 self.pokemonDetail = PokemonModel(pokemon: pokemonDetailEntity)
             } catch {
-                print("Error: \(error)")
+                self.state = .error
+                self.showWarningError = true
+                self.logError("Failed to load pokemon detail: \(error)")
             }
         }
     }
 
+    /// Loads Pokémon species information including flavor text from the API.
+    ///
+    /// Fetches species-specific data using the use case and updates the view model state.
+    /// On success, sets state to `.okey`.
+    /// On failure, sets state to `.error` and displays an error dialog.
+    ///
+    /// - Note: This method is called during the view lifecycle (onAppear).
     func loadSpecie() {
         guard let idPokemon = dto?.idPokemon else {
-            return // Mostrar error
+            return
         }
 
         Task {
@@ -61,38 +93,40 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
 
                 self.pokemonDetailSpecie = PokemonSpecieModel(pokemon: pokemonSpeciesEntity)
             } catch {
-                print("Error: \(error)")
+                self.state = .error
+                self.showWarningError = true
+                self.logError("Failed to load pokemon specie: \(error)")
             }
         }
     }
 
+    /// Handles the like/favorite button press with async error handling.
+    ///
+    /// This method manages adding or removing a Pokémon from favorites through the appropriate use case.
+    /// It provides proper error handling and user feedback:
+    /// - Shows loading state
+    /// - Updates state to `.okey` on success
+    /// - Sets state to `.error` and displays error dialog on failure
+    /// - Logs all errors for debugging
+    ///
+    /// - Parameter liked: Boolean indicating whether the Pokémon should be added (`true`) or removed (`false`) from favorites.
     func likeButtonPressed(liked: Bool) {
         guard let pokemonToSave = self.pokemonDetail else {
-                return
+            return
         }
-        if liked {
-            // Grabamos en BBDD
-            self.modelContext?.insert(pokemonToSave)
-        } else {
-            // Grabamos en BBDD
-            self.modelContext?.delete(pokemonToSave)
-        }
-        try? self.modelContext?.save()
-    }
-
-    func fetchData() {
-                do {
-                    let descriptor = FetchDescriptor<PokemonModel>(sortBy: [SortDescriptor(\.id)])
-                    let pokemons = try modelContext?.fetch(descriptor)
-                    if let pokemons = pokemons {
-                        if !pokemons.isEmpty {
-                            let pokem = pokemons[0]
-                            print(pokem.name)
-                            print(pokem.id)
-                        }
-                    }
-                } catch {
-                    print("Fetch failed")
+        Task {
+            do {
+                if liked {
+                    try await addFavoriteUseCase.execute(pokemon: pokemonToSave)
+                } else {
+                    try await removeFavoriteUseCase.execute(pokemon: pokemonToSave)
                 }
+                self.state = .okey
+            } catch {
+                self.state = .error
+                self.showWarningError = true
+                self.logError("Failed to update favorite: \(error)")
             }
+        }
+    }
 }

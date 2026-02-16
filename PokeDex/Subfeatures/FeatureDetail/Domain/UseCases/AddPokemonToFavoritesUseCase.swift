@@ -5,7 +5,6 @@
 //  Created by yamartin on 4/3/25.
 //
 
-
 class AddPokemonToFavoritesUseCase {
     let repository: FavoritesRepositoryProtocol
 
