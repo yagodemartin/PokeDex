@@ -109,6 +109,8 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     /// - Sets state to `.error` and displays error dialog on failure
     /// - Logs all errors for debugging
     ///
+    /// Passes Pokémon ID instead of model instance for thread-safety with @MainActor.
+    ///
     /// - Parameter liked: Boolean indicating whether the Pokémon should be added (`true`) or removed (`false`) from favorites.
     func likeButtonPressed(liked: Bool) {
         guard let pokemonToSave = self.pokemonDetail else {
@@ -117,9 +119,9 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
         Task {
             do {
                 if liked {
-                    try await addFavoriteUseCase.execute(pokemon: pokemonToSave)
+                    try await addFavoriteUseCase.execute(pokemonID: pokemonToSave.id)
                 } else {
-                    try await removeFavoriteUseCase.execute(pokemon: pokemonToSave)
+                    try await removeFavoriteUseCase.execute(pokemonID: pokemonToSave.id)
                 }
                 self.state = .okey
             } catch {

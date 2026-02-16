@@ -30,7 +30,7 @@ import SwiftData
 /// - `types`: Type(s) of the Pokémon
 /// - `stats`: Base statistics (HP, Attack, Defense, etc.)
 @Model
-final class PokemonModel: Identifiable, @unchecked Sendable {
+final class PokemonModel: Identifiable {
     var id: Int
     var name: String
     var imageURL: URL?
@@ -49,7 +49,22 @@ final class PokemonModel: Identifiable, @unchecked Sendable {
         self.stats = pokemon.stats
     }
 
-    func getNumber () -> String {
+    /// Initializes a Pokémon model with minimal data (for database operations).
+    ///
+    /// - Parameters:
+    ///   - id: The Pokémon's unique identifier
+    ///   - name: The Pokémon's name
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.imageURL = nil
+        self.height = nil
+        self.weight = nil
+        self.types = []
+        self.stats = nil
+    }
+
+    func getNumber() -> String {
         return String(format: "#%03d", id)
     }
 }

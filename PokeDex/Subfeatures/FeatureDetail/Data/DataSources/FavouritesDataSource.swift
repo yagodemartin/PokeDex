@@ -1,12 +1,17 @@
 //
-//  DataSource.swift
+//  FavouritesDataSource.swift
 //  PokeDex
 //
 //  Created by yamartin on 4/3/25.
 //
+
 import SwiftUI
 import SwiftData
 
+/// DataSource for managing Pokémon favorites in SwiftData.
+///
+/// Handles all database operations for favorite Pokémon using SwiftData.
+/// Operates exclusively on the main thread with @MainActor.
 @MainActor
 final class FavouritesDataSource {
     private let modelContainer: ModelContainer
@@ -39,6 +44,7 @@ final class FavouritesDataSource {
     }
 
     /// Fetches all Pokémon marked as favorites.
+    ///
     /// - Returns: An array of PokemonModel objects that are marked as favorites.
     /// - Throws: Any errors that occur during the database fetch operation.
     func fetchPokemons() async throws -> [PokemonModel] {
@@ -46,35 +52,64 @@ final class FavouritesDataSource {
     }
 
     /// Adds a Pokémon to the favorites list.
-    /// - Parameter pokemon: The PokemonModel object to add to favorites.
+    ///
+    /// Creates a new PokemonModel instance and inserts it into the database.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to add to favorites.
     /// - Throws: Any errors that occur during the insert or save operation.
-    func addPokemonToFavorites(pokemon: PokemonModel) async throws {
-        modelContext.insert(pokemon)
-        try await saveContext()
+    func addPokemonToFavorites(pokemonID: Int) async throws {
+        let fetchDescriptor = FetchDescriptor<PokemonModel>(
+            predicate: #Predicate { $0.id == pokemonID },
+            sortBy: [.init(\.id, order: .forward)]
+        )
+
+        let results = try modelContext.fetch(fetchDescriptor)
+
+        if results.isEmpty {
+            let pokemon = PokemonModel(id: pokemonID, name: "")
+            modelContext.insert(pokemon)
+            try await saveContext()
+        }
     }
 
     /// Removes a Pokémon from the favorites list.
-    /// - Parameter pokemon: The PokemonModel object to remove from favorites.
+    ///
+    /// Finds the Pokémon by ID and deletes it from the database.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to remove from favorites.
     /// - Throws: Any errors that occur during the delete or save operation.
-    func removePokemonFromFavorites(pokemon: PokemonModel) async throws {
-        modelContext.delete(pokemon)
+    func removePokemonFromFavorites(pokemonID: Int) async throws {
+        let fetchDescriptor = FetchDescriptor<PokemonModel>(
+            predicate: #Predicate { $0.id == pokemonID },
+            sortBy: [.init(\.id, order: .forward)]
+        )
+
+        let results = try modelContext.fetch(fetchDescriptor)
+
+        for pokemon in results {
+            modelContext.delete(pokemon)
+        }
+
         try await saveContext()
     }
 
     /// Checks if a specific Pokémon is in the favorites list.
-    /// - Parameter pokemon: The PokemonModel object to check.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to check.
     /// - Returns: A boolean indicating whether the Pokémon is a favorite.
     /// - Throws: Any errors that occur during the database fetch operation.
-    func isPokemonFavorite(pokemon: PokemonModel) async throws -> Bool {
-        let idPokemon = pokemon.id
-        let fetchDescriptor = FetchDescriptor<PokemonModel>(predicate: #Predicate {
-            $0.id == idPokemon}, sortBy: [.init(\.id, order: .forward)])
+    func isPokemonFavorite(pokemonID: Int) async throws -> Bool {
+        let fetchDescriptor = FetchDescriptor<PokemonModel>(
+            predicate: #Predicate { $0.id == pokemonID },
+            sortBy: [.init(\.id, order: .forward)]
+        )
 
         let results = try modelContext.fetch(fetchDescriptor)
         return !results.isEmpty
     }
 
     /// Saves the current state of the model context.
+    ///
     /// - Throws: Any errors that occur during the save operation.
     func saveContext() async throws {
         try modelContext.save()
