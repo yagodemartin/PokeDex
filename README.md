@@ -1,10 +1,18 @@
 # 🎮 PokéDex
 
+[![iOS 16.0+](https://img.shields.io/badge/iOS-16.0+-blue.svg)](https://www.apple.com/ios/)
+[![Swift 5.9+](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
+[![Xcode 15.0+](https://img.shields.io/badge/Xcode-15.0+-brightgreen.svg)](https://developer.apple.com/xcode/)
+[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-yellowgreen.svg)](ARCHITECTURE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Una aplicación iOS moderna que explora el mundo Pokémon usando **Clean Architecture** y **SwiftUI**. Diseñada como referencia educativa para implementar patrones arquitectónicos profesionales en proyectos iOS.
+
+**Repository**: [github.com/yagodemartin/PokeDex](https://github.com/yagodemartin/PokeDex)
 
 ## 📸 Demo
 
-![PokéDex Preview](blob/preview.gif)
+![PokéDex Preview](https://via.placeholder.com/800x400?text=PokeDex+Demo)
 
 ## ✨ Características
 
@@ -168,18 +176,25 @@ Este proyecto es de código abierto para propósitos educativos.
 
 ## 🤝 Contribuir
 
-Las contribuciones son bienvenidas. Por favor:
+Las contribuciones son bienvenidas. Por favor consulta [CONTRIBUTING.md](CONTRIBUTING.md) para:
+- Guía de contribución
+- Estrategia GitFlow Light
+- Estándares de código
+- Proceso de Pull Request
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+## 📚 Documentación
+
+- [**ARCHITECTURE.md**](ARCHITECTURE.md) - Arquitectura detallada de Clean Architecture
+- [**CONTRIBUTING.md**](CONTRIBUTING.md) - Guía de contribución
+- [**CHANGELOG.md**](CHANGELOG.md) - Historial de cambios
+- [**SETUP.md**](SETUP.md) - Configuración y desarrollo
+- [**FEATURES.md**](FEATURES.md) - Características y módulos
+- [**DOCC_GUIDE.md**](DOCC_GUIDE.md) - Documentación con DocC
 
 ## ❓ Preguntas y Soporte
 
-Si tienes preguntas o encuentras problemas, abre un [Issue](https://github.com/yourusername/PokeDex/issues).
+Si tienes preguntas o encuentras problemas, abre un [Issue](https://github.com/yagodemartin/PokeDex/issues).
 
 ---
 
-**Última actualización**: Febrero 2025
+**Última actualización**: Febrero 2026
