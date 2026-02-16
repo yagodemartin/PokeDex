@@ -5,12 +5,11 @@
 //  Created by yamartin on 19/3/25.
 //
 
-
 import SwiftUI
 
 struct PokemonTCGCardsView: View {
     @StateObject private var viewModel = PokemonTCGViewModel()
-    
+
     var body: some View {
         NavigationView {
             List(viewModel.cards) { card in
@@ -21,7 +20,7 @@ struct PokemonTCGCardsView: View {
                         ProgressView()
                     }
                     .frame(width: 50, height: 70)
-                    
+
                     VStack(alignment: .leading) {
                         Text(card.name)
                             .font(.headline)

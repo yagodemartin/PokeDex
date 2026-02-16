@@ -8,21 +8,21 @@ struct FeatureFavoritesView: View {
         GridItem(.adaptive(minimum: 150), spacing: 10),
         GridItem(.adaptive(minimum: 150), spacing: 10)
     ]
+
     init(_ viewModel: FeatureFavoritesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-            VStack(spacing: 0) {
-                if viewModel.state == .okey {
-                    list
-                } else if viewModel.state == .error {
-                    HStack {
-                        Text("Ha habido un error")
-                    }
+        VStack(spacing: 0) {
+            if viewModel.state == .okey {
+                list
+            } else if viewModel.state == .error {
+                HStack {
+                    Text("Ha habido un error")
                 }
-            } // VSTACK
-
+            }
+        }
         .onAppear {
             tabBarState.isTabBarVisible = true
             viewModel.onAppear()
@@ -45,14 +45,13 @@ struct FeatureFavoritesView: View {
                                         background: pokemon.types.first?.getColor() ?? .black)
                     }
                     .simultaneousGesture(TapGesture().onEnded {
-                                    tabBarState.isTabBarVisible = false // Hide tab bar when navigating
-                                })
+                        tabBarState.isTabBarVisible = false
+                    })
                 }
             }
         }
         .padding(.horizontal)
         .background(Color.defaultBackground)
         .ignoresSafeArea(.all, edges: .bottom)
-
     }
 }

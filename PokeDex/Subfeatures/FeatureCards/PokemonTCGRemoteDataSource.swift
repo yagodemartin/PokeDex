@@ -27,6 +27,7 @@ class PokemonTCGRemoteDataSource: PokemonTCGRepository {
                 print("Error al decodificar JSON: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
+        .resume()
     }
 }

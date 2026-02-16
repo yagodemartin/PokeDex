@@ -21,19 +21,17 @@ struct PokemonExploreView: View {
     }
 
     var body: some View {
-            VStack(spacing: 0) {
-                header
-                Spacer()
-                if viewModel.state == .okey {
-                    list
-                } else if viewModel.state == .error {
-                    HStack {
-                        Text("Ha habido un error")
-                    }
+        VStack(spacing: 0) {
+            header
+            Spacer()
+            if viewModel.state == .okey {
+                list
+            } else if viewModel.state == .error {
+                HStack {
+                    Text("Ha habido un error")
                 }
-            } // VSTACK
-  
-
+            }
+        }
         .onAppear {
             tabBarState.isTabBarVisible = true
             viewModel.onAppear()
@@ -43,9 +41,7 @@ struct PokemonExploreView: View {
         }
         .loaderBase(state: self.viewModel.state)
         .toolbar(.hidden, for: .tabBar)
-
     }
-
 
     var header: some View {
         HStack {
@@ -61,11 +57,10 @@ struct PokemonExploreView: View {
                 .frame(width: 40, height: 40)
             Spacer()
         }
-        .foregroundColor(.white) // MAL
+        .foregroundColor(.white)
         .background(
             Color.headerBackground
         )
-        
     }
 
     var list: some View {
@@ -79,15 +74,14 @@ struct PokemonExploreView: View {
                                         background: pokemon.types.first?.getColor() ?? .black)
                     }
                     .simultaneousGesture(TapGesture().onEnded {
-                                    tabBarState.isTabBarVisible = false // Hide tab bar when navigating
-                                })
+                        tabBarState.isTabBarVisible = false
+                    })
                 }
             }
         }
         .padding(.horizontal)
         .background(Color.defaultBackground)
         .ignoresSafeArea(.all, edges: .bottom)
-
     }
 }
 

@@ -16,7 +16,7 @@ struct CardView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text( pokemonDetail?.getNumber() ?? "000")
+                    Text(pokemonDetail?.getNumber() ?? "000")
                         .padding(10)
                         .foregroundColor(.white)
                     Spacer()
@@ -34,11 +34,11 @@ struct CardView: View {
                 Text(pokemonDetail?.name.capitalized ?? "")
                     .font(.system(size: 50))
                     .bold()
-                    .foregroundColor(.white) // esta mal
+                    .foregroundColor(.white)
                     .padding(.bottom, 0)
-                HStack( spacing: 10) {
+                HStack(spacing: 10) {
                     VStack {
-                        Text("Height") // esta mal
+                        Text("Height")
                             .font(.system(size: 30))
                             .bold()
                             .foregroundColor(.white)
@@ -47,7 +47,7 @@ struct CardView: View {
                             .foregroundColor(.white)
                     }
                     VStack {
-                        Text("Weight") // esta mal
+                        Text("Weight")
                             .font(.system(size: 30))
                             .bold()
                             .foregroundColor(.white)
@@ -58,7 +58,8 @@ struct CardView: View {
                 }
                 .padding(.top, 1)
                 .padding(.bottom, 20)
-            }.background(LinearGradient(
+            }
+            .background(LinearGradient(
                 colors: [
                     pokeColor.adjust(brightness: 0.2),
                     pokeColor,
@@ -74,17 +75,14 @@ struct CardView: View {
     }
 
     struct LikeButton: View {
-       // Use a `@State` variable to track whether the button is liked or not
-        @Binding  var isLiked: Bool
+        @Binding var isLiked: Bool
 
         var body: some View {
-           Button(action: {
-               // Toggle the value of the `isLiked` variable when the button is tapped
-               self.isLiked.toggle()
-           }) {
-               // Use an image or label to indicate that the button is a "like" button
-               Image(systemName: isLiked ? "heart.fill" : "heart")
-           }
-       }
-   }
+            Button(action: {
+                self.isLiked.toggle()
+            }) {
+                Image(systemName: isLiked ? "heart.fill" : "heart")
+            }
+        }
+    }
 }
