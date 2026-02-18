@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "XcodeBuildMCP": {
+      "command": "xcodebuildmcp",
+      "args": ["mcp"]
+    },
+    "SwiftLens": {
+      "command": "/Users/yamartin/.local/bin/swiftlens"
+    },
+    "AppleDocs": {
+      "command": "npx",
+      "args": ["apple-doc-mcp-server@latest"]
+    }
+  }
+}
