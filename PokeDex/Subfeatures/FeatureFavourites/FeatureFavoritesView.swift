@@ -37,12 +37,12 @@ struct FeatureFavoritesView: View {
     var list: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: columns, alignment: .center, spacing: 20) {
-                ForEach(viewModel.favorites) { favorite in
+                ForEach(viewModel.favorites, id: \.id) { favorite in
                     NavigationLink(destination: PokemonDetailAssembly.view(dto: PokemonDetailAssemblyDTO(idPokemon: favorite.pokemonID))) {
                         PokemonCellView(name: favorite.name,
                                         number: favorite.pokemonID,
                                         imageURL: favorite.imageURL,
-                                        background: Color.gray)
+                                        background: PokemonTypes(rawValue: favorite.typeColorName)?.getColor() ?? .gray)
                     }
                     .simultaneousGesture(TapGesture().onEnded {
                         tabBarState.isTabBarVisible = false

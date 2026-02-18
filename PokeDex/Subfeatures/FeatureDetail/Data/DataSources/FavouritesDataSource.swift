@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 /// Data Transfer Object for storing Pokémon favorites in SwiftData.
 ///
@@ -14,13 +15,14 @@ import SwiftData
 /// This prevents assertion failures when PokemonModel is modified or deleted.
 /// All fields are copied from PokemonModel to create a persistent snapshot.
 @Model
-final class FavoritePokemonDTO {
+final class FavoritePokemonDTO: Identifiable {
+    var id: UUID = UUID()
     var pokemonID: Int
     var name: String
     var imageURL: URL?
     var height: Int?
     var weight: Int?
-    var types: [PokemonTypes]
+    var typeColorName: String = "normal"
     var stats: PokemonStats?
 
     init(
@@ -29,15 +31,16 @@ final class FavoritePokemonDTO {
         imageURL: URL? = nil,
         height: Int? = nil,
         weight: Int? = nil,
-        types: [PokemonTypes] = [],
+        typeColorName: String = "normal",
         stats: PokemonStats? = nil
     ) {
+        self.id = UUID()
         self.pokemonID = pokemonID
         self.name = name
         self.imageURL = imageURL
         self.height = height
         self.weight = weight
-        self.types = types
+        self.typeColorName = typeColorName
         self.stats = stats
     }
 }
@@ -105,13 +108,14 @@ final class FavouritesDataSource {
         let results = try modelContext.fetch(fetchDescriptor)
 
         if results.isEmpty {
+            let typeColorName = pokemonData?.types.first?.rawValue ?? "normal"
             let favorite = FavoritePokemonDTO(
                 pokemonID: pokemonID,
                 name: pokemonData?.name ?? "",
                 imageURL: pokemonData?.imageURL,
                 height: pokemonData?.height,
                 weight: pokemonData?.weight,
-                types: pokemonData?.types ?? [],
+                typeColorName: typeColorName,
                 stats: pokemonData?.stats
             )
             modelContext.insert(favorite)

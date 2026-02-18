@@ -41,6 +41,7 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     @Published var pokemonDetail: PokemonModel?
     @Published var pokemonDetailSpecie: PokemonSpecieModel?
     @Published var isFavorite: Bool = false
+    @Published var isUpdatingFavorite: Bool = false
 
     let isPokemonFavoriteUseCase = IsPokemonFavoriteUseCase(repository: FavoritesRepository.shared)
 
@@ -78,7 +79,8 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     }
 
     private func checkFavoriteState() async {
-        guard let pokemonId = pokemonDetail?.id else { return }
+        guard let pokemonId = pokemonDetail?.id
+        else { return }
         do {
             self.isFavorite = try await isPokemonFavoriteUseCase.execute(pokemonID: pokemonId)
         } catch {
@@ -124,6 +126,7 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     /// - Sets state to `.error` and displays error dialog on failure
     /// - Logs all errors for debugging
     /// - Reverts `isFavorite` on failure
+    /// - Prevents race conditions with `isUpdatingFavorite` flag
     ///
     /// - Parameter liked: Boolean indicating whether the Pokémon should be added (`true`) or removed (`false`) from favorites.
     func likeButtonPressed(liked: Bool) {
@@ -131,7 +134,12 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
             return
         }
 
+        guard !isUpdatingFavorite else {
+            return
+        }
+
         self.isFavorite = liked
+        self.isUpdatingFavorite = true
 
         Task {
             do {
@@ -147,6 +155,7 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
                 self.logError("Failed to update favorite: \(error)")
                 self.isFavorite = !liked
             }
+            self.isUpdatingFavorite = false
         }
     }
 }
