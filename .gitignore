@@ -1,0 +1,30 @@
+# Xcode build artifacts
+.build/
+DerivedData/
+*.xcarchive
+
+# Xcode
+*.xcworkspace/
+xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace
+.DS_Store
+Xcodeproj/xcuserdata/
+
+# Dependencies
+Pods/
+.swift-version
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.swp
+*.swo
+*~
+.DS_Store
