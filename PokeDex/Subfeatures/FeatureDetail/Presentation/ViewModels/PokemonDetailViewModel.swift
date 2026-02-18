@@ -40,6 +40,9 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
 
     @Published var pokemonDetail: PokemonModel?
     @Published var pokemonDetailSpecie: PokemonSpecieModel?
+    @Published var isFavorite: Bool = false
+
+    let isPokemonFavoriteUseCase = IsPokemonFavoriteUseCase(repository: FavoritesRepository.shared)
 
     override func onAppear() {
         self.loadDetail()
@@ -65,11 +68,21 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
                 }
 
                 self.pokemonDetail = PokemonModel(pokemon: pokemonDetailEntity)
+                await self.checkFavoriteState()
             } catch {
                 self.state = .error
                 self.showWarningError = true
                 self.logError("Failed to load pokemon detail: \(error)")
             }
+        }
+    }
+
+    private func checkFavoriteState() async {
+        guard let pokemonId = pokemonDetail?.id else { return }
+        do {
+            self.isFavorite = try await isPokemonFavoriteUseCase.execute(pokemonID: pokemonId)
+        } catch {
+            self.logError("Failed to check favorite state: \(error)")
         }
     }
 
@@ -103,23 +116,27 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
     /// Handles the like/favorite button press with async error handling.
     ///
     /// This method manages adding or removing a Pokémon from favorites through the appropriate use case.
+    /// When adding to favorites (liked=true), passes complete PokemonModel data to ensure all fields
+    /// (image, types, stats, height, weight) are copied to the local FavoritePokemonDTO.
+    ///
     /// It provides proper error handling and user feedback:
-    /// - Shows loading state
     /// - Updates state to `.okey` on success
     /// - Sets state to `.error` and displays error dialog on failure
     /// - Logs all errors for debugging
-    ///
-    /// Passes Pokémon ID instead of model instance for thread-safety with @MainActor.
+    /// - Reverts `isFavorite` on failure
     ///
     /// - Parameter liked: Boolean indicating whether the Pokémon should be added (`true`) or removed (`false`) from favorites.
     func likeButtonPressed(liked: Bool) {
         guard let pokemonToSave = self.pokemonDetail else {
             return
         }
+
+        self.isFavorite = liked
+
         Task {
             do {
                 if liked {
-                    try await addFavoriteUseCase.execute(pokemonID: pokemonToSave.id)
+                    try await addFavoriteUseCase.execute(pokemonID: pokemonToSave.id, pokemonData: pokemonToSave)
                 } else {
                     try await removeFavoriteUseCase.execute(pokemonID: pokemonToSave.id)
                 }
@@ -128,6 +145,7 @@ class PokemonDetailViewModel: BaseViewModel, ObservableObject {
                 self.state = .error
                 self.showWarningError = true
                 self.logError("Failed to update favorite: \(error)")
+                self.isFavorite = !liked
             }
         }
     }

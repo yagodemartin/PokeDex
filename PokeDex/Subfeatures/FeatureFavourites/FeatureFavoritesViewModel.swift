@@ -25,7 +25,7 @@ import Foundation
 @MainActor
 class FeatureFavoritesViewModel: BaseViewModel, ObservableObject {
     var dto: FeatureFavoritesDTO?
-    @Published var favorites = [PokemonModel]()
+    @Published var favorites = [FavoritePokemonDTO]()
 
     init(dto: FeatureFavoritesDTO) {
         super.init()

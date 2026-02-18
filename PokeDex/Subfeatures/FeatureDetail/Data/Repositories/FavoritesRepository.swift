@@ -32,10 +32,15 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
 
     /// Adds a Pokémon to the favorites list.
     ///
-    /// - Parameter pokemonID: The unique identifier of the Pokémon to add.
+    /// Copies all Pokémon data (name, image, types, stats, etc.) into the local favorites database.
+    /// This ensures the favorite remains intact even if the original PokemonModel is modified or deleted.
+    ///
+    /// - Parameters:
+    ///   - pokemonID: The unique identifier of the Pokémon to add.
+    ///   - pokemonData: Complete Pokémon model with all fields to be copied to FavoritePokemonDTO.
     /// - Throws: Any errors from the data source (database failures, etc.)
-    func addPokemonToFavorites(pokemonID: Int) async throws {
-        try await FavouritesDataSource.shared.addPokemonToFavorites(pokemonID: pokemonID)
+    func addPokemonToFavorites(pokemonID: Int, pokemonData: PokemonModel? = nil) async throws {
+        try await FavouritesDataSource.shared.addPokemonToFavorites(pokemonID: pokemonID, pokemonData: pokemonData)
     }
 
     /// Removes a Pokémon from the favorites list.
@@ -48,9 +53,9 @@ class FavoritesRepository: FavoritesRepositoryProtocol {
 
     /// Fetches all Pokémon marked as favorites.
     ///
-    /// - Returns: An array of PokemonModel objects from the favorites list.
+    /// - Returns: An array of FavoritePokemonDTO objects from the favorites list.
     /// - Throws: Any errors from the data source (database failures, etc.)
-    func fetchAllFavoritePokemons() async throws -> [PokemonModel] {
+    func fetchAllFavoritePokemons() async throws -> [FavoritePokemonDTO] {
         try await FavouritesDataSource.shared.fetchPokemons()
     }
 

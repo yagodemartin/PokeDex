@@ -8,10 +8,45 @@
 import SwiftUI
 import SwiftData
 
+/// Data Transfer Object for storing Pokémon favorites in SwiftData.
+///
+/// Complete DTO that stores all Pokémon data independently from PokemonModel.
+/// This prevents assertion failures when PokemonModel is modified or deleted.
+/// All fields are copied from PokemonModel to create a persistent snapshot.
+@Model
+final class FavoritePokemonDTO {
+    var pokemonID: Int
+    var name: String
+    var imageURL: URL?
+    var height: Int?
+    var weight: Int?
+    var types: [PokemonTypes]
+    var stats: PokemonStats?
+
+    init(
+        pokemonID: Int,
+        name: String,
+        imageURL: URL? = nil,
+        height: Int? = nil,
+        weight: Int? = nil,
+        types: [PokemonTypes] = [],
+        stats: PokemonStats? = nil
+    ) {
+        self.pokemonID = pokemonID
+        self.name = name
+        self.imageURL = imageURL
+        self.height = height
+        self.weight = weight
+        self.types = types
+        self.stats = stats
+    }
+}
+
 /// DataSource for managing Pokémon favorites in SwiftData.
 ///
 /// Handles all database operations for favorite Pokémon using SwiftData.
 /// Operates exclusively on the main thread with @MainActor.
+/// Uses FavoritePokemonDTO to avoid keeping references to PokemonModel.
 @MainActor
 final class FavouritesDataSource {
     private let modelContainer: ModelContainer
@@ -30,7 +65,7 @@ final class FavouritesDataSource {
     }()
 
     init(inMemoryOnly: Bool = false) throws {
-        let schema = Schema([PokemonModel.self])
+        let schema = Schema([FavoritePokemonDTO.self])
         let modelConfiguration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: inMemoryOnly
@@ -45,49 +80,61 @@ final class FavouritesDataSource {
 
     /// Fetches all Pokémon marked as favorites.
     ///
-    /// - Returns: An array of PokemonModel objects that are marked as favorites.
+    /// - Returns: An array of FavoritePokemonDTO objects.
     /// - Throws: Any errors that occur during the database fetch operation.
-    func fetchPokemons() async throws -> [PokemonModel] {
-        return try modelContext.fetch(FetchDescriptor<PokemonModel>())
+    func fetchPokemons() async throws -> [FavoritePokemonDTO] {
+        return try modelContext.fetch(FetchDescriptor<FavoritePokemonDTO>())
     }
 
     /// Adds a Pokémon to the favorites list.
     ///
-    /// Creates a new PokemonModel instance and inserts it into the database.
+    /// Creates a new FavoritePokemonDTO instance with complete Pokémon data and inserts it into the database.
+    /// Copies all fields from PokemonModel to ensure data independence from the main model.
+    /// This prevents data loss if the original PokemonModel is modified or deleted.
     ///
-    /// - Parameter pokemonID: The unique identifier of the Pokémon to add to favorites.
+    /// - Parameters:
+    ///   - pokemonID: The unique identifier of the Pokémon to add to favorites.
+    ///   - pokemonData: Complete PokemonModel containing all fields (name, image, types, stats, height, weight).
     /// - Throws: Any errors that occur during the insert or save operation.
-    func addPokemonToFavorites(pokemonID: Int) async throws {
-        let fetchDescriptor = FetchDescriptor<PokemonModel>(
-            predicate: #Predicate { $0.id == pokemonID },
-            sortBy: [.init(\.id, order: .forward)]
+    func addPokemonToFavorites(pokemonID: Int, pokemonData: PokemonModel?) async throws {
+        let idToAdd = pokemonID
+        let fetchDescriptor = FetchDescriptor<FavoritePokemonDTO>(
+            predicate: #Predicate { $0.pokemonID == idToAdd }
         )
 
         let results = try modelContext.fetch(fetchDescriptor)
 
         if results.isEmpty {
-            let pokemon = PokemonModel(id: pokemonID, name: "")
-            modelContext.insert(pokemon)
+            let favorite = FavoritePokemonDTO(
+                pokemonID: pokemonID,
+                name: pokemonData?.name ?? "",
+                imageURL: pokemonData?.imageURL,
+                height: pokemonData?.height,
+                weight: pokemonData?.weight,
+                types: pokemonData?.types ?? [],
+                stats: pokemonData?.stats
+            )
+            modelContext.insert(favorite)
             try await saveContext()
         }
     }
 
     /// Removes a Pokémon from the favorites list.
     ///
-    /// Finds the Pokémon by ID and deletes it from the database.
+    /// Finds the favorite by ID and deletes it from the database.
     ///
     /// - Parameter pokemonID: The unique identifier of the Pokémon to remove from favorites.
     /// - Throws: Any errors that occur during the delete or save operation.
     func removePokemonFromFavorites(pokemonID: Int) async throws {
-        let fetchDescriptor = FetchDescriptor<PokemonModel>(
-            predicate: #Predicate { $0.id == pokemonID },
-            sortBy: [.init(\.id, order: .forward)]
+        let idToRemove = pokemonID
+        let fetchDescriptor = FetchDescriptor<FavoritePokemonDTO>(
+            predicate: #Predicate { $0.pokemonID == idToRemove }
         )
 
         let results = try modelContext.fetch(fetchDescriptor)
 
-        for pokemon in results {
-            modelContext.delete(pokemon)
+        for favorite in results {
+            modelContext.delete(favorite)
         }
 
         try await saveContext()
@@ -99,9 +146,9 @@ final class FavouritesDataSource {
     /// - Returns: A boolean indicating whether the Pokémon is a favorite.
     /// - Throws: Any errors that occur during the database fetch operation.
     func isPokemonFavorite(pokemonID: Int) async throws -> Bool {
-        let fetchDescriptor = FetchDescriptor<PokemonModel>(
-            predicate: #Predicate { $0.id == pokemonID },
-            sortBy: [.init(\.id, order: .forward)]
+        let idToCheck = pokemonID
+        let fetchDescriptor = FetchDescriptor<FavoritePokemonDTO>(
+            predicate: #Predicate { $0.pokemonID == idToCheck }
         )
 
         let results = try modelContext.fetch(fetchDescriptor)

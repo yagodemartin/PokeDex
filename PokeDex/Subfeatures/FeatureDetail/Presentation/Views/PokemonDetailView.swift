@@ -12,7 +12,6 @@ struct PokemonDetailView: View {
     @EnvironmentObject var tabBarState: TabBarState
 
     @StateObject private var viewModel: PokemonDetailViewModel
-    @State var isLiked: Bool = false
 
     init(_ viewModel: PokemonDetailViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -27,7 +26,15 @@ struct PokemonDetailView: View {
                     .ignoresSafeArea()
 
                 ScrollView {
-                    CardView(pokemonDetail: viewModel.pokemonDetail, pokeColor: pokeColor, liked: $isLiked)
+                    CardView(
+                        pokemonDetail: viewModel.pokemonDetail,
+                        pokeColor: pokeColor,
+                        liked: viewModel.isFavorite,
+                        onLikeTapped: {
+                            tabBarState.isLiked = !viewModel.isFavorite
+                            viewModel.likeButtonPressed(liked: !viewModel.isFavorite)
+                        }
+                    )
 
                     // Types
                     if let types = viewModel.pokemonDetail?.types {
@@ -61,12 +68,6 @@ struct PokemonDetailView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .tint(.black)
             .toolbar(.hidden, for: .tabBar)
-            .onChange(of: isLiked) {
-                if isLiked {
-                    tabBarState.isLiked = true
-                    self.viewModel.likeButtonPressed(liked: isLiked)
-                }
-            }
         }
     }
 }

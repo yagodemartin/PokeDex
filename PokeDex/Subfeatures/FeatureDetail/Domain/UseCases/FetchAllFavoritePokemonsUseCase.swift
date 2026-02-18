@@ -13,8 +13,8 @@ class FetchAllFavoritePokemonsUseCase {
     }
 
     /// Executes the use case to fetch all favorite Pokémon.
-    /// - Returns: An array of PokemonModel objects marked as favorites.
-    func execute() async throws -> [PokemonModel] {
+    /// - Returns: An array of FavoritePokemonDTO objects marked as favorites.
+    func execute() async throws -> [FavoritePokemonDTO] {
         return try await repository.fetchAllFavoritePokemons()
     }
 }

@@ -13,9 +13,14 @@
 protocol FavoritesRepositoryProtocol {
     /// Adds a Pokémon to the favorites list.
     ///
-    /// - Parameter pokemonID: The unique identifier of the Pokémon to add to favorites.
+    /// Copies all Pokémon data into FavoritePokemonDTO to create an independent persistent copy.
+    /// This prevents data loss if the original PokemonModel is modified or deleted.
+    ///
+    /// - Parameters:
+    ///   - pokemonID: The unique identifier of the Pokémon to add to favorites.
+    ///   - pokemonData: Complete Pokémon model containing all fields to be persisted.
     /// - Throws: An error if the operation fails (e.g., database issues).
-    func addPokemonToFavorites(pokemonID: Int) async throws
+    func addPokemonToFavorites(pokemonID: Int, pokemonData: PokemonModel?) async throws
 
     /// Removes a Pokémon from the favorites list.
     ///
@@ -25,9 +30,9 @@ protocol FavoritesRepositoryProtocol {
 
     /// Retrieves all Pokémon marked as favorites.
     ///
-    /// - Returns: An array of PokemonModel objects that are marked as favorites.
+    /// - Returns: An array of FavoritePokemonDTO objects that are marked as favorites.
     /// - Throws: An error if the operation fails (e.g., database issues).
-    func fetchAllFavoritePokemons() async throws -> [PokemonModel]
+    func fetchAllFavoritePokemons() async throws -> [FavoritePokemonDTO]
 
     /// Checks if a specific Pokémon is in the favorites list.
     ///

@@ -10,7 +10,8 @@ import SwiftUI
 struct CardView: View {
     var pokemonDetail: PokemonModel?
     var pokeColor: Color
-    @Binding var liked: Bool
+    var liked: Bool
+    var onLikeTapped: () -> Void
 
     var body: some View {
         ZStack {
@@ -20,7 +21,7 @@ struct CardView: View {
                         .padding(10)
                         .foregroundColor(.white)
                     Spacer()
-                    LikeButton(isLiked: $liked)
+                    LikeButton(isLiked: liked, onTap: onLikeTapped)
                         .foregroundColor(.headerBackground)
                         .padding(10)
                 }
@@ -75,15 +76,16 @@ struct CardView: View {
     }
 
     struct LikeButton: View {
-        @Binding var isLiked: Bool
+        var isLiked: Bool
+        var onTap: () -> Void
 
         var body: some View {
             Button(
-                action: {
-                    self.isLiked.toggle()
-                },
+                action: onTap,
                 label: {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
+                        .scaleEffect(isLiked ? 1.2 : 1.0)
+                        .animation(.easeInOut(duration: 0.3), value: isLiked)
                 }
             )
         }

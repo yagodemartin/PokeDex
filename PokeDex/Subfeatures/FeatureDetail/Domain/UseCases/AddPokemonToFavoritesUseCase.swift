@@ -18,9 +18,11 @@ final class AddPokemonToFavoritesUseCase {
 
     /// Executes the use case to add a Pokémon to the favorites list.
     ///
-    /// - Parameter pokemonID: The unique identifier of the Pokémon to be added to favorites.
+    /// - Parameters:
+    ///   - pokemonID: The unique identifier of the Pokémon to be added to favorites.
+    ///   - pokemonData: Optional complete Pokémon data to save with all details.
     /// - Throws: An error if the operation fails.
-    func execute(pokemonID: Int) async throws {
-        try await repository.addPokemonToFavorites(pokemonID: pokemonID)
+    func execute(pokemonID: Int, pokemonData: PokemonModel?) async throws {
+        try await repository.addPokemonToFavorites(pokemonID: pokemonID, pokemonData: pokemonData)
     }
 }
