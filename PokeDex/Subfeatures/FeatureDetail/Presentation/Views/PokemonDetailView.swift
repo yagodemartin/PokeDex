@@ -31,8 +31,15 @@ struct PokemonDetailView: View {
                         pokeColor: pokeColor,
                         liked: viewModel.isFavorite,
                         onLikeTapped: {
-                            tabBarState.isLiked = !viewModel.isFavorite
-                            viewModel.likeButtonPressed(liked: !viewModel.isFavorite)
+                            let newLikeState = !viewModel.isFavorite
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                viewModel.likeButtonPressed(liked: newLikeState)
+                            }
+                            if newLikeState {
+                                tabBarState.isLiked = true
+                            } else {
+                                tabBarState.isDisliked = true
+                            }
                         }
                     )
 

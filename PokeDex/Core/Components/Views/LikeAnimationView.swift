@@ -15,9 +15,15 @@ struct AnimationValues {
     var horizontalOffset = 0.0
 }
 
+enum AnimationType {
+    case like
+    case dislike
+}
+
 struct LikeAnimationView: View, Identifiable {
     let id = UUID()
     let duration: Double
+    let type: AnimationType
     private let heartSize = 80.0
 
     var body: some View {
@@ -38,8 +44,9 @@ struct LikeAnimationView: View, Identifiable {
 
                     KeyframeTrack(\.angle) {
                         let angle = Double.random(in: -45...45)
-                        CubicKeyframe(.degrees(angle), duration: duration * 0.2)
-                        CubicKeyframe(.degrees(-angle), duration: duration * 0.3)
+                        let angleMultiplier = type == .like ? 1.0 : -1.0
+                        CubicKeyframe(.degrees(angle * angleMultiplier), duration: duration * 0.2)
+                        CubicKeyframe(.degrees(-angle * angleMultiplier), duration: duration * 0.3)
                         LinearKeyframe(.degrees(.zero), duration: duration * 0.2)
                     }
 
@@ -51,8 +58,9 @@ struct LikeAnimationView: View, Identifiable {
 
                     KeyframeTrack(\.verticalOffset) {
                         let yOffset = proxy.frame(in: .global).midY + heartSize / 2
+                        let offsetMultiplier = type == .like ? -1.0 : 1.0
                         LinearKeyframe(0.0, duration: duration * 0.7)
-                        LinearKeyframe(-yOffset, duration: duration * 0.3, timingCurve: .easeIn)
+                        LinearKeyframe(yOffset * offsetMultiplier, duration: duration * 0.3, timingCurve: .easeIn)
                     }
 
                     KeyframeTrack(\.horizontalOffset) {
@@ -82,5 +90,5 @@ struct HeartImageView: View {
 }
 
 #Preview {
-    LikeAnimationView(duration: 1.0)
+    LikeAnimationView(duration: 1.0, type: .like)
 }

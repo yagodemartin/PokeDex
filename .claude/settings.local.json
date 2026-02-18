@@ -52,7 +52,9 @@
       "mcp__XcodeBuildMCP__start_sim_log_cap",
       "mcp__XcodeBuildMCP__screenshot",
       "mcp__XcodeBuildMCP__snapshot_ui",
-      "mcp__XcodeBuildMCP__stop_sim_log_cap"
+      "mcp__XcodeBuildMCP__stop_sim_log_cap",
+      "mcp__XcodeBuildMCP__launch_app_sim",
+      "mcp__XcodeBuildMCP__install_app_sim"
     ]
   },
   "enabledMcpjsonServers": [

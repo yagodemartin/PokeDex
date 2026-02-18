@@ -84,8 +84,8 @@ struct CardView: View {
                 action: onTap,
                 label: {
                     Image(systemName: isLiked ? "heart.fill" : "heart")
+                        .font(.system(size: 24))
                         .scaleEffect(isLiked ? 1.2 : 1.0)
-                        .animation(.easeInOut(duration: 0.3), value: isLiked)
                 }
             )
         }

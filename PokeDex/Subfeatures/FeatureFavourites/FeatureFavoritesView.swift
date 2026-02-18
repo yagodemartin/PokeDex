@@ -42,7 +42,7 @@ struct FeatureFavoritesView: View {
                         PokemonCellView(name: favorite.name,
                                         number: favorite.pokemonID,
                                         imageURL: favorite.imageURL,
-                                        background: favorite.types.first?.getColor() ?? .gray)
+                                        background: Color.gray)
                     }
                     .simultaneousGesture(TapGesture().onEnded {
                         tabBarState.isTabBarVisible = false

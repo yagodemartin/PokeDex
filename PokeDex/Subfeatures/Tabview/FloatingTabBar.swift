@@ -63,8 +63,14 @@ struct FloatingTabBar: View {
         .toolbar(.hidden, for: .tabBar)
         .onChange(of: tabBarState.isLiked) {
             if tabBarState.isLiked {
-                likeAnimationViews.append(LikeAnimationView(duration: animationDuration))
+                likeAnimationViews.append(LikeAnimationView(duration: animationDuration, type: .like))
                 tabBarState.isLiked = false
+            }
+        }
+        .onChange(of: tabBarState.isDisliked) {
+            if tabBarState.isDisliked {
+                likeAnimationViews.append(LikeAnimationView(duration: animationDuration, type: .dislike))
+                tabBarState.isDisliked = false
             }
         }
     }

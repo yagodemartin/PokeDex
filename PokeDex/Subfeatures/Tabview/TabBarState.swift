@@ -11,4 +11,5 @@ import Combine
 class TabBarState: ObservableObject {
     @Published var isTabBarVisible: Bool = true
     @Published var isLiked: Bool = false
+    @Published var isDisliked: Bool = false
 }
