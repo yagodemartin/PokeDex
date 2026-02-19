@@ -44,6 +44,8 @@ struct FloatingTabBar: View {
                         }
                     }
                 }
+                // Customize TabBar colors for Liquid Glass
+                .tint(.tabBarActive)  // Active tab color (red)
                 // iOS 26+: Add minimize behavior on scroll down
                 .modifier(MinimizeBehaviorModifier())
             } else {
