@@ -59,19 +59,20 @@ final class FavouritesDataSource {
         do {
             return try FavouritesDataSource()
         } catch {
-            do {
-                return try FavouritesDataSource(inMemoryOnly: true)
-            } catch {
-                fatalError("Cannot create model container: \(error)")
-            }
+            fatalError("Cannot create persisted favorites model container: \(error)")
         }
     }()
 
-    init(inMemoryOnly: Bool = false) throws {
+    /// Initializes the FavouritesDataSource with persistent disk storage.
+    /// All favorite Pokémon are automatically saved to disk and persist across app launches.
+    init() throws {
         let schema = Schema([FavoritePokemonDTO.self])
+
+        // SwiftData persists to disk in ~/Library/Application Support/{bundle}/
+        // isStoredInMemoryOnly: false ensures data survives app restarts
         let modelConfiguration = ModelConfiguration(
             schema: schema,
-            isStoredInMemoryOnly: inMemoryOnly
+            isStoredInMemoryOnly: false
         )
 
         self.modelContainer = try ModelContainer(
