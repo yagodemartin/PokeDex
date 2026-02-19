@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PokemonExploreView: View {
-    @EnvironmentObject var tabBarState: TabBarState
     @StateObject private var viewModel: PokemonExploreViewModel
 
     let columns = [
@@ -33,14 +32,12 @@ struct PokemonExploreView: View {
             }
         }
         .onAppear {
-            tabBarState.isTabBarVisible = true
             viewModel.onAppear()
         }
         .sheet(isPresented: self.$viewModel.showWarningError) {
             CustomErrorView(actionPerformed: viewModel.errorViewAction)
         }
         .loaderBase(state: self.viewModel.state)
-        .toolbar(.hidden, for: .tabBar)
     }
 
     var header: some View {
@@ -73,9 +70,6 @@ struct PokemonExploreView: View {
                                         imageURL: pokemon.imageURL,
                                         background: pokemon.types.first?.getColor() ?? .black)
                     }
-                    .simultaneousGesture(TapGesture().onEnded {
-                        tabBarState.isTabBarVisible = false
-                    })
                 }
             }
         }

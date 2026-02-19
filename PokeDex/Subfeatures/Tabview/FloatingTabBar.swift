@@ -7,60 +7,94 @@
 
 import SwiftUI
 
+/// Native TabBar with Liquid Glass effect (iOS 18+)
+/// Handles tab switching and like/dislike animations that float above the native tab bar.
 struct FloatingTabBar: View {
-    enum Tabs {
-        case pokedex
-        case favorites
-        case search
-        case settings
-    }
     @EnvironmentObject var tabBarState: TabBarState
-    @State private var selectedTab: Tabs = .pokedex
-    @State private var isTabBarVisible: Bool = true // Estado para controlar la visibilidad
-
     @State private var likeAnimationViews: [LikeAnimationView] = []
     private let animationDuration = 1.0
 
     var body: some View {
         ZStack {
-            TabView(selection: $selectedTab, content: {
-                Group {
+            // Native TabView with iOS 18+ Tab API for Liquid Glass
+            if #available(iOS 18, *) {
+                TabView {
+                    Tab("Pokédex", image: "pikachuTab") {
+                        NavigationStack {
+                            PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
+                        }
+                    }
+
+                    Tab("Collection", systemImage: "sparkle.magnifyingglass") {
+                        NavigationStack {
+                            FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
+                        }
+                    }
+
+                    Tab("Search", systemImage: "bell.badge.fill") {
+                        NavigationStack {
+                            Color(.orange).ignoresSafeArea()
+                        }
+                    }
+
+                    Tab("Settings", systemImage: "gear.circle") {
+                        NavigationStack {
+                            Color(.brown).ignoresSafeArea()
+                        }
+                    }
+                }
+                // iOS 26+: Add minimize behavior on scroll down
+                .modifier(MinimizeBehaviorModifier())
+            } else {
+                // Fallback for iOS 16-17 using older TabView API
+                TabView {
                     NavigationStack {
                         PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
-                    }                            .tag(Tabs.pokedex)
+                    }
+                    .tabItem {
+                        Image("pikachuTab")
+                        Text("Pokédex")
+                    }
 
                     NavigationStack {
                         FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
-                    }                            .tag(Tabs.favorites)
+                    }
+                    .tabItem {
+                        Image(systemName: "sparkle.magnifyingglass")
+                        Text("Collection")
+                    }
 
                     NavigationStack {
                         Color(.orange).ignoresSafeArea()
-                    }                            .tag(Tabs.search)
+                    }
+                    .tabItem {
+                        Image(systemName: "bell.badge.fill")
+                        Text("Search")
+                    }
 
                     NavigationStack {
                         Color(.brown).ignoresSafeArea()
-                    }                            .tag(Tabs.settings)
+                    }
+                    .tabItem {
+                        Image(systemName: "gear.circle")
+                        Text("Settings")
+                    }
                 }
-                .toolbar(.hidden, for: .tabBar)
-            })
-            .onAppear {
-                tabBarState.isTabBarVisible = true
-                // Ensure tab bar is visible when main view appears
             }
+
+            // Like/Dislike animation overlay (floats above native tab bar)
             VStack {
                 Spacer()
                 ForEach(likeAnimationViews) { likeAnimationView in
                     likeAnimationView.onAppear {
-                        // when the animation ends, remove a LikeAnimationView from the array
                         DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
                             likeAnimationViews.removeFirst()
                         }
                     }
                 }
-                tabBar
             }
+            .ignoresSafeArea()
         }
-        .toolbar(.hidden, for: .tabBar)
         .onChange(of: tabBarState.isLiked) {
             if tabBarState.isLiked {
                 likeAnimationViews.append(LikeAnimationView(duration: animationDuration, type: .like))
@@ -74,120 +108,15 @@ struct FloatingTabBar: View {
             }
         }
     }
+}
 
-    private var tabBar: some View {
-        VStack {
-            if tabBarState.isTabBarVisible {
-                HStack(content: {
-                    Spacer()
-
-                    Button(action: {
-                        withAnimation {
-                            selectedTab = .pokedex
-                        }
-                    }, label: {
-                        VStack(alignment: .center, content: {
-                            Image("pikachuTab")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22)
-                            if selectedTab == .pokedex {
-                                Text("Pokedex")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    })
-                    .foregroundStyle(selectedTab == .pokedex ? .white : .black)
-                    Spacer()
-
-                    Button(action: {
-                        withAnimation {
-                            selectedTab = .favorites
-                        }
-                    }, label: {
-                        VStack(alignment: .center, content: {
-                            Image(systemName: "sparkle.magnifyingglass")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22)
-                            if selectedTab == .favorites {
-                                Text("Collection")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    })
-                    .foregroundStyle(selectedTab == .favorites ? .white : .black)
-                    Spacer()
-
-                    Button(action: {
-                        withAnimation {
-                            selectedTab = .search
-                        }
-                    }, label: {
-                        VStack(alignment: .center, content: {
-                            Image(systemName: "bell.badge.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22)
-                            if selectedTab == .search {
-                                Text("Search")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    })
-                    .foregroundStyle(selectedTab == .search ? .white : .black)
-                    Spacer()
-
-                    Button(action: {
-                        withAnimation {
-                            selectedTab = .settings
-                        }
-                    }, label: {
-                        VStack(alignment: .center, content: {
-                            Image(systemName: "gear.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22)
-                            if selectedTab == .settings {
-                                Text("Settings")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    })
-                    .foregroundStyle(selectedTab == .settings ? .white : .black)
-                    Spacer()
-                    Button(action: {
-                        withAnimation {
-                            selectedTab = .search
-                        }
-                    }, label: {
-                        VStack(alignment: .center, content: {
-                            Image(systemName: "bell.badge.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22)
-                            if selectedTab == .search {
-                                Text("Search")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    })
-                    .foregroundStyle(selectedTab == .search ? .white : .black)
-                })
-                .padding()
-                .frame(height: 72)
-                .background {
-                    RoundedRectangle(cornerRadius: 36)
-                        .fill(Color.headerBackground.opacity(0.9))
-                        .shadow(color: Color.black.opacity(0.5), radius: 8, y: 2)
-                }
-                .padding(.horizontal)
-            }
+// Modifier to conditionally apply iOS 26+ minimize behavior
+private struct MinimizeBehaviorModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26, *) {
+            content.tabBarMinimizeBehavior(.onScrollDown)
+        } else {
+            content
         }
     }
 }

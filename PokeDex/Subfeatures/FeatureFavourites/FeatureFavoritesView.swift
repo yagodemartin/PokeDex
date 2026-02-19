@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct FeatureFavoritesView: View {
-    @EnvironmentObject var tabBarState: TabBarState
     @StateObject private var viewModel: FeatureFavoritesViewModel
 
     let columns = [
@@ -24,14 +23,12 @@ struct FeatureFavoritesView: View {
             }
         }
         .onAppear {
-            tabBarState.isTabBarVisible = true
             viewModel.onAppear()
         }
         .sheet(isPresented: self.$viewModel.showWarningError) {
             CustomErrorView(actionPerformed: viewModel.errorViewAction)
         }
         .loaderBase(state: self.viewModel.state)
-        .toolbar(.hidden, for: .tabBar)
     }
 
     var list: some View {
@@ -44,9 +41,6 @@ struct FeatureFavoritesView: View {
                                         imageURL: favorite.imageURL,
                                         background: PokemonTypes(rawValue: favorite.typeColorName)?.getColor() ?? .gray)
                     }
-                    .simultaneousGesture(TapGesture().onEnded {
-                        tabBarState.isTabBarVisible = false
-                    })
                 }
             }
         }
