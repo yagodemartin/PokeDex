@@ -19,25 +19,25 @@ struct FloatingTabBar: View {
             // Native TabView with iOS 18+ Tab API for Liquid Glass
             if #available(iOS 18, *) {
                 TabView {
+                    Tab("Batalla", systemImage: "bolt.fill") {
+                        NavigationStack {
+                            Color(.orange).ignoresSafeArea()
+                        }
+                    }
+
+                    Tab("Favoritos", systemImage: "heart.fill") {
+                        NavigationStack {
+                            FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
+                        }
+                    }
+
                     Tab("Pokédex", image: "pikachuTab") {
                         NavigationStack {
                             PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
                         }
                     }
 
-                    Tab("Collection", systemImage: "sparkle.magnifyingglass") {
-                        NavigationStack {
-                            FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
-                        }
-                    }
-
-                    Tab("Search", systemImage: "bell.badge.fill") {
-                        NavigationStack {
-                            Color(.orange).ignoresSafeArea()
-                        }
-                    }
-
-                    Tab("Settings", systemImage: "gear.circle") {
+                    Tab("Ajustes", systemImage: "gear.circle") {
                         NavigationStack {
                             Color(.brown).ignoresSafeArea()
                         }
@@ -49,6 +49,22 @@ struct FloatingTabBar: View {
                 // Fallback for iOS 16-17 using older TabView API
                 TabView {
                     NavigationStack {
+                        Color(.orange).ignoresSafeArea()
+                    }
+                    .tabItem {
+                        Image(systemName: "bolt.fill")
+                        Text("Batalla")
+                    }
+
+                    NavigationStack {
+                        FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
+                    }
+                    .tabItem {
+                        Image(systemName: "heart.fill")
+                        Text("Favoritos")
+                    }
+
+                    NavigationStack {
                         PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
                     }
                     .tabItem {
@@ -57,27 +73,11 @@ struct FloatingTabBar: View {
                     }
 
                     NavigationStack {
-                        FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
-                    }
-                    .tabItem {
-                        Image(systemName: "sparkle.magnifyingglass")
-                        Text("Collection")
-                    }
-
-                    NavigationStack {
-                        Color(.orange).ignoresSafeArea()
-                    }
-                    .tabItem {
-                        Image(systemName: "bell.badge.fill")
-                        Text("Search")
-                    }
-
-                    NavigationStack {
                         Color(.brown).ignoresSafeArea()
                     }
                     .tabItem {
                         Image(systemName: "gear.circle")
-                        Text("Settings")
+                        Text("Ajustes")
                     }
                 }
             }
