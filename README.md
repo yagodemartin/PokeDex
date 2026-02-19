@@ -12,7 +12,17 @@ Una aplicación iOS moderna que explora el mundo Pokémon usando **Clean Archite
 
 ## 📸 Demo
 
-![PokéDex Preview](https://via.placeholder.com/800x400?text=PokeDex+Demo)
+**Video en vivo** del app ejecutándose con las características principales:
+
+https://github.com/yagodemartin/PokeDex/assets/pokedex_demo.mp4
+
+![PokéDex Demo](pokedex_demo.mp4)
+
+**Features mostradas**:
+- 🔴 TabBar nativo con Liquid Glass
+- ❤️ Badge dinámico de favoritos
+- 🔍 Lista de Pokémon con grid layout
+- 📱 Navegación fluida entre tabs
 
 ## ✨ Características
 
