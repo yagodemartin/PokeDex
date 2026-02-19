@@ -6,10 +6,12 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 var sharedModelContainer: ModelContainer = {
     let schema = Schema([
-        PokemonModel.self
+        PokemonModel.self,
+        FavoritePokemonDTO.self  // Include favorites in the main data store
     ])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -24,9 +26,16 @@ var sharedModelContainer: ModelContainer = {
 struct PokeDexApp: App {
     @StateObject private var tabBarState = TabBarState()
 
+    init() {
+        // Initialize FavouritesDataSource with the shared ModelContainer
+        // This ensures favorites are persisted to the main app database
+        FavouritesDataSource.initializeShared(modelContainer: sharedModelContainer)
+    }
+
     var body: some Scene {
         WindowGroup {
-            FloatingTabBar()                .environmentObject(tabBarState)
+            FloatingTabBar()
+                .environmentObject(tabBarState)
                 .modelContainer(sharedModelContainer)
         }
     }

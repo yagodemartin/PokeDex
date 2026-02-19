@@ -48,37 +48,33 @@ final class FavoritePokemonDTO: Identifiable {
 /// DataSource for managing Pokémon favorites in SwiftData.
 ///
 /// Handles all database operations for favorite Pokémon using SwiftData.
+/// Uses the shared ModelContainer from the app to ensure persistence in the main database.
 /// Operates exclusively on the main thread with @MainActor.
 /// Uses FavoritePokemonDTO to avoid keeping references to PokemonModel.
 @MainActor
 final class FavouritesDataSource {
-    private let modelContainer: ModelContainer
     private let modelContext: ModelContext
+    private static var _shared: FavouritesDataSource?
 
-    static let shared: FavouritesDataSource = {
-        do {
-            return try FavouritesDataSource()
-        } catch {
-            fatalError("Cannot create persisted favorites model container: \(error)")
+    /// Lazy-initialized shared instance using the app's ModelContainer.
+    /// Must be initialized via `initializeShared(modelContainer:)` before use.
+    static var shared: FavouritesDataSource {
+        guard let instance = _shared else {
+            fatalError("FavouritesDataSource.shared accessed before initialization. Call initializeShared(modelContainer:) in App startup.")
         }
-    }()
+        return instance
+    }
 
-    /// Initializes the FavouritesDataSource with persistent disk storage.
-    /// All favorite Pokémon are automatically saved to disk and persist across app launches.
-    init() throws {
-        let schema = Schema([FavoritePokemonDTO.self])
+    /// Initializes the shared FavouritesDataSource with the app's ModelContainer.
+    /// Should be called once during app initialization in PokeDexApp.
+    static func initializeShared(modelContainer: ModelContainer) {
+        _shared = FavouritesDataSource(modelContainer: modelContainer)
+    }
 
-        // SwiftData persists to disk in ~/Library/Application Support/{bundle}/
-        // isStoredInMemoryOnly: false ensures data survives app restarts
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false
-        )
-
-        self.modelContainer = try ModelContainer(
-            for: schema,
-            configurations: [modelConfiguration]
-        )
+    /// Initializes the FavouritesDataSource with a ModelContainer.
+    /// All favorite Pokémon are automatically saved to the database
+    /// and persist across app launches.
+    init(modelContainer: ModelContainer) {
         self.modelContext = modelContainer.mainContext
     }
 
