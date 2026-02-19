@@ -1,0 +1,93 @@
+# ==========================================
+# XCODE BUILD ARTIFACTS
+# ==========================================
+.build/
+DerivedData/
+*.xcarchive
+Build/
+build/
+
+# ==========================================
+# XCODE USER DATA (LOCAL STATE)
+# ==========================================
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace
+*.xcworkspace/xcuserdata
+Xcodeproj/xcuserdata/
+Xcodeproj/xcshareddata/xcschemes/*.xcscheme
+
+# ==========================================
+# SWIFT PACKAGE MANAGER (SPM)
+# ==========================================
+.swiftpm/
+.build/
+Packages/
+
+# ==========================================
+# COCOAPODS
+# ==========================================
+Pods/
+Podfile.lock
+.pods/
+
+# ==========================================
+# CREDENTIALS & SECRETS (CRITICAL)
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+.secrets/
+secrets.json
+api-keys.json
+config.local.json
+
+# ==========================================
+# TEST COVERAGE
+# ==========================================
+*.gcda
+*.gcno
+*.gcov
+coverage/
+.coverage
+
+# ==========================================
+# IDE & EDITOR
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+.DS_Store
+
+# ==========================================
+# OS FILES
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# TEMPORARY & DEBUG
+# ==========================================
+*.tmp
+*.temp
+.lldb/
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

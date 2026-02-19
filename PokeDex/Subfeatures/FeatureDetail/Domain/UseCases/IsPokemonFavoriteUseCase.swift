@@ -4,7 +4,12 @@
 //
 //  Created by yamartin on 4/3/25.
 //
-class IsPokemonFavoriteUseCase {
+
+/// Use case for checking if a Pokémon is in favorites.
+///
+/// Handles the business logic for verifying whether a Pokémon is in the favorites list.
+/// Uses Pokémon ID instead of model instance for thread-safety with @MainActor.
+final class IsPokemonFavoriteUseCase {
     let repository: FavoritesRepositoryProtocol
 
     init(repository: FavoritesRepositoryProtocol) {
@@ -12,9 +17,11 @@ class IsPokemonFavoriteUseCase {
     }
 
     /// Executes the use case to check if a Pokémon is in the favorites list.
-    /// - Parameter pokemon: The PokemonModel object to check.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to check.
     /// - Returns: A boolean indicating whether the Pokémon is a favorite.
-    func execute(pokemon: PokemonModel) async throws -> Bool {
-        return try await repository.isPokemonFavorite(pokemon: pokemon)
+    /// - Throws: An error if the operation fails.
+    func execute(pokemonID: Int) async throws -> Bool {
+        return try await repository.isPokemonFavorite(pokemonID: pokemonID)
     }
 }

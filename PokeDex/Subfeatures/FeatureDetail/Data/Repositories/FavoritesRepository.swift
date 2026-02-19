@@ -7,25 +7,64 @@
 
 import Foundation
 
+/// Repository for managing favorite Pokémon operations.
+///
+/// `FavoritesRepository` implements the Repository pattern to provide a clean API
+/// for all favorite-related database operations. It acts as a bridge between
+/// Use Cases and the Data Source layer.
+///
+/// ## Key Features
+/// - All methods are `async throws` to properly propagate errors
+/// - Singleton pattern for consistent state
+/// - Direct delegation to `FavouritesDataSource`
+/// - Implements `FavoritesRepositoryProtocol` for dependency injection
+/// - Passes Pokémon IDs (Int) instead of model instances for thread-safety
+///
+/// ## Thread Safety
+/// Marked with `@MainActor` to ensure all operations occur on the main thread,
+/// which is required by SwiftData and UI updates. Uses `Sendable` types (Int)
+/// for passing data across actor boundaries.
 @MainActor
 class FavoritesRepository: FavoritesRepositoryProtocol {
     static let shared = FavoritesRepository()
 
-    private init() {} // Implementación de singleton
+    private init() {}
 
-    func addPokemonToFavorites(pokemon: PokemonModel) {
-        FavouritesDataSource.shared.addPokemonToFavorites(pokemon: pokemon)
+    /// Adds a Pokémon to the favorites list.
+    ///
+    /// Copies all Pokémon data (name, image, types, stats, etc.) into the local favorites database.
+    /// This ensures the favorite remains intact even if the original PokemonModel is modified or deleted.
+    ///
+    /// - Parameters:
+    ///   - pokemonID: The unique identifier of the Pokémon to add.
+    ///   - pokemonData: Complete Pokémon model with all fields to be copied to FavoritePokemonDTO.
+    /// - Throws: Any errors from the data source (database failures, etc.)
+    func addPokemonToFavorites(pokemonID: Int, pokemonData: PokemonModel? = nil) async throws {
+        try await FavouritesDataSource.shared.addPokemonToFavorites(pokemonID: pokemonID, pokemonData: pokemonData)
     }
 
-    func removePokemonFromFavorites(pokemon: PokemonModel) {
-        FavouritesDataSource.shared.removePokemonFromFavorites(pokemon: pokemon)
+    /// Removes a Pokémon from the favorites list.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to remove.
+    /// - Throws: Any errors from the data source (database failures, etc.)
+    func removePokemonFromFavorites(pokemonID: Int) async throws {
+        try await FavouritesDataSource.shared.removePokemonFromFavorites(pokemonID: pokemonID)
     }
 
-    func fetchAllFavoritePokemons() -> [PokemonModel] {
-        FavouritesDataSource.shared.fetchPokemons()
+    /// Fetches all Pokémon marked as favorites.
+    ///
+    /// - Returns: An array of FavoritePokemonDTO objects from the favorites list.
+    /// - Throws: Any errors from the data source (database failures, etc.)
+    func fetchAllFavoritePokemons() async throws -> [FavoritePokemonDTO] {
+        try await FavouritesDataSource.shared.fetchPokemons()
     }
 
-    func isPokemonFavorite(pokemon: PokemonModel) -> Bool {
-        return FavouritesDataSource.shared.isPokemonFavorite(pokemon: pokemon)
+    /// Checks if a specific Pokémon is in the favorites list.
+    ///
+    /// - Parameter pokemonID: The unique identifier of the Pokémon to check.
+    /// - Returns: A boolean indicating whether the Pokémon is a favorite.
+    /// - Throws: Any errors from the data source (database failures, etc.)
+    func isPokemonFavorite(pokemonID: Int) async throws -> Bool {
+        return try await FavouritesDataSource.shared.isPokemonFavorite(pokemonID: pokemonID)
     }
 }

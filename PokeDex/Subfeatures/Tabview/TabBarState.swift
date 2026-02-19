@@ -8,7 +8,9 @@
 import SwiftUI
 import Combine
 
+/// Manages tab bar state for animations (like/dislike).
+/// Note: Tab bar visibility is now handled natively by iOS 18+ TabView.minimize behavior.
 class TabBarState: ObservableObject {
-    @Published var isTabBarVisible: Bool = true
     @Published var isLiked: Bool = false
+    @Published var isDisliked: Bool = false
 }
