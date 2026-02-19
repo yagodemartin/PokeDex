@@ -157,10 +157,6 @@ Archivos de test:
 3. **Manejo de Estados**: BaseViewModel proporciona estados comunes (loading, error, success)
 4. **Thread Safety**: Todas las actualizaciones de UI corren en MainThread con `@MainActor`
 
-## 👥 Autores
-
-- **Desarrollador Principal**: [@yamartin](https://github.com/yamartin)
-- **Equipo**: MAPPS iOS Team
 
 ## 📄 Licencia
 
