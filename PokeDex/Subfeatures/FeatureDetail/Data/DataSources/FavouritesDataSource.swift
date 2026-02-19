@@ -16,7 +16,7 @@ import Foundation
 /// All fields are copied from PokemonModel to create a persistent snapshot.
 @Model
 final class FavoritePokemonDTO: Identifiable {
-    var id: UUID = UUID()
+    var id: UUID
     var pokemonID: Int
     var name: String
     var imageURL: URL?
@@ -81,12 +81,17 @@ final class FavouritesDataSource {
         self.modelContext = modelContainer.mainContext
     }
 
-    /// Fetches all Pokémon marked as favorites.
+    /// Fetches all Pokémon marked as favorites from the database.
+    ///
+    /// Uses an optimized FetchDescriptor to efficiently load favorites.
+    /// Results are sorted by pokemonID for consistent ordering.
     ///
     /// - Returns: An array of FavoritePokemonDTO objects.
     /// - Throws: Any errors that occur during the database fetch operation.
     func fetchPokemons() async throws -> [FavoritePokemonDTO] {
-        return try modelContext.fetch(FetchDescriptor<FavoritePokemonDTO>())
+        var descriptor = FetchDescriptor<FavoritePokemonDTO>()
+        descriptor.sortBy = [SortDescriptor(\.pokemonID)]
+        return try modelContext.fetch(descriptor)
     }
 
     /// Adds a Pokémon to the favorites list.
