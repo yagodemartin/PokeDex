@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 /// Native TabBar with Liquid Glass effect (iOS 18+)
 /// Handles tab switching and like/dislike animations that float above the native tab bar.
@@ -13,6 +14,7 @@ struct FloatingTabBar: View {
     @EnvironmentObject var tabBarState: TabBarState
     @State private var selectedTab: Int = 2  // Pokédex tab (index 2) as default
     @State private var likeAnimationViews: [LikeAnimationView] = []
+    @Query private var favorites: [FavoritePokemonDTO]
     private let animationDuration = 1.0
 
     var body: some View {
@@ -31,6 +33,7 @@ struct FloatingTabBar: View {
                             FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
                         }
                     }
+                    .badge(favorites.isEmpty ? 0 : favorites.count)
 
                     Tab("Pokédex", image: "pikachuTab", value: 2) {
                         NavigationStack {
