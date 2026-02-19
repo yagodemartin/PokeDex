@@ -11,6 +11,7 @@ import SwiftUI
 /// Handles tab switching and like/dislike animations that float above the native tab bar.
 struct FloatingTabBar: View {
     @EnvironmentObject var tabBarState: TabBarState
+    @State private var selectedTab: Int = 2  // Pokédex tab (index 2) as default
     @State private var likeAnimationViews: [LikeAnimationView] = []
     private let animationDuration = 1.0
 
@@ -18,26 +19,26 @@ struct FloatingTabBar: View {
         ZStack {
             // Native TabView with iOS 18+ Tab API for Liquid Glass
             if #available(iOS 18, *) {
-                TabView {
-                    Tab("Batalla", systemImage: "bolt.fill") {
+                TabView(selection: $selectedTab) {
+                    Tab("Batalla", systemImage: "bolt.fill", value: 0) {
                         NavigationStack {
                             Color(.orange).ignoresSafeArea()
                         }
                     }
 
-                    Tab("Favoritos", systemImage: "heart.fill") {
+                    Tab("Favoritos", systemImage: "heart.fill", value: 1) {
                         NavigationStack {
                             FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
                         }
                     }
 
-                    Tab("Pokédex", image: "pikachuTab") {
+                    Tab("Pokédex", image: "pikachuTab", value: 2) {
                         NavigationStack {
                             PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
                         }
                     }
 
-                    Tab("Ajustes", systemImage: "gear.circle") {
+                    Tab("Ajustes", systemImage: "gear.circle", value: 3) {
                         NavigationStack {
                             Color(.brown).ignoresSafeArea()
                         }
@@ -47,7 +48,7 @@ struct FloatingTabBar: View {
                 .modifier(MinimizeBehaviorModifier())
             } else {
                 // Fallback for iOS 16-17 using older TabView API
-                TabView {
+                TabView(selection: $selectedTab) {
                     NavigationStack {
                         Color(.orange).ignoresSafeArea()
                     }
@@ -55,6 +56,7 @@ struct FloatingTabBar: View {
                         Image(systemName: "bolt.fill")
                         Text("Batalla")
                     }
+                    .tag(0)
 
                     NavigationStack {
                         FeatureFavoritesAssembly.view(dto: FeatureFavoritesDTO())
@@ -63,6 +65,7 @@ struct FloatingTabBar: View {
                         Image(systemName: "heart.fill")
                         Text("Favoritos")
                     }
+                    .tag(1)
 
                     NavigationStack {
                         PokemonExploreAssembly.view(dto: PokemonExploreAssemblyDTO())
@@ -71,6 +74,7 @@ struct FloatingTabBar: View {
                         Image("pikachuTab")
                         Text("Pokédex")
                     }
+                    .tag(2)
 
                     NavigationStack {
                         Color(.brown).ignoresSafeArea()
@@ -79,6 +83,7 @@ struct FloatingTabBar: View {
                         Image(systemName: "gear.circle")
                         Text("Ajustes")
                     }
+                    .tag(3)
                 }
             }
 
