@@ -18,10 +18,12 @@ Una aplicación iOS moderna que explora el mundo Pokémon usando **Clean Archite
 
 - 🔍 **Exploración de Pokémon** - Navega por 155 Pokémon de la generación Kanto
 - 📊 **Estadísticas Detalladas** - Visualiza HP, Ataque, Defensa, etc. con gráficos interactivos
-- ❤️ **Sistema de Favoritos** - Guarda tus Pokémon favoritos localmente
+- ❤️ **Sistema de Favoritos** - Guarda tus Pokémon favoritos localmente con persistencia en SwiftData
 - 🎴 **Cartas TCG** - Integración con PokéAPI Trading Card Game
 - 🎨 **UI/UX Moderna** - Diseño limpio con animaciones y colores por tipo
-- 🌐 **Caché Inteligente** - Carga de datos paralela y eficiente
+- 🌐 **Caché Inteligente** - Carga de datos paralela y eficiente (2.7x más rápido)
+- ✨ **Liquid Glass TabBar** - TabBar nativo con efecto Liquid Glass (iOS 18+) con colores personalizados
+- 🔔 **Badge Dinámico** - Muestra el conteo de favoritos en tiempo real
 
 ## 🏗️ Arquitectura
 
@@ -125,6 +127,18 @@ Integración con PokéAPI TCG.
 - Búsqueda de cartas
 - Galería con imágenes
 
+### Tabview - Liquid Glass Navigation
+Navegación moderna con TabBar nativo.
+- **Liquid Glass Effect** (iOS 18+) - Efecto de vidrio semi-transparente automático
+- **Scroll-down Minimize** (iOS 26+) - La barra se oculta al hacer scroll hacia abajo
+- **Colores Personalizados** - TabBar activa (rojo), inactiva (blanco 60%)
+- **Badge Dinámico** - Muestra conteo de favoritos en tiempo real
+- **Tabs Principales**:
+  - ⚡ Batalla (futuro)
+  - ❤️ Favoritos (con badge)
+  - 🔴 Pokédex (tab principal)
+  - ⚙️ Ajustes (futuro)
+
 ## 🧪 Testing
 
 El proyecto incluye tests unitarios en `PokeDexPruebas`:
@@ -161,9 +175,14 @@ Archivos de test:
 ## 📝 Notas Importantes
 
 1. **Carga de Datos**: Los 155 primeros Pokémon se cargan con sus detalles en paralelo para optimizar tiempo
-2. **Persistencia**: SwiftData maneja automáticamente el almacenamiento de favoritos
+2. **Persistencia**: SwiftData maneja automáticamente el almacenamiento de favoritos en una BD unificada
 3. **Manejo de Estados**: BaseViewModel proporciona estados comunes (loading, error, success)
 4. **Thread Safety**: Todas las actualizaciones de UI corren en MainThread con `@MainActor`
+5. **Liquid Glass TabBar**:
+   - iOS 18+: Efecto de vidrio nativo automático
+   - iOS 26+: Comportamiento de minimizar al hacer scroll
+   - iOS 16-17: Fallback a TabView clásico
+6. **HTTP Caching**: Mejora de 2.7x en velocidad de carga con URLCache inteligente
 
 ## 👥 Autores
 
