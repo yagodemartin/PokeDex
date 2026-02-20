@@ -60,18 +60,8 @@ struct CardView: View {
                 .padding(.top, 1)
                 .padding(.bottom, 20)
             }
-            .background(LinearGradient(
-                colors: [
-                    pokeColor.adjust(brightness: 0.2),
-                    pokeColor,
-                    pokeColor.adjust(brightness: -0.2)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ))
-            .cornerRadius(15)
+            .glassCardBackground(color: pokeColor)
             .padding()
-            .shadow(color: pokeColor.adjust(brightness: -0.2), radius: 5, x: 0, y: 10)
         }
     }
 
